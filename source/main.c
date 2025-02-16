@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:42:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 19:47:44 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/02/16 20:42:57 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(void)
 	if (init_window(window))
 		return (1);
 	fill_window(window);
-	mlx_key_hook(window->win, (void *)exit, NULL);
+	//mlx_key_hook(window->win, (void *)exit, NULL);
 	mlx_loop(window->mlx);
 	free(window->mlx);
 	free(window);
