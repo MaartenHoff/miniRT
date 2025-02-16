@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 21:01:21 by maahoff          ###   ########.fr       */
+/*   Created: 2025/01/16 14:32:02 by maahoff           #+#    #+#             */
+/*   Updated: 2025/01/16 14:32:47 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# define WIDTH	1000
-# define HEIGHT	1000
+char	*ft_strcat(char *dest, const char *src)
+{
+	size_t	i;
+	size_t	dest_len;
 
-# define ESC	65307
-
-# include "structs.h"
-# include "42mlx/mlx.h"
-# include "libft/libft.h"
-# include <stdlib.h>
-
-int	close_window(t_data *data);
-int	key_hook(int key_code, t_data *data);
-
-#endif
+	dest_len = 0;
+	while (dest[dest_len])
+		dest_len++;
+	i = 0;
+	while (src[i])
+	{
+		dest[dest_len + i] = src[i];
+		i++;
+	}
+	dest[dest_len + i] = '\0';
+	return (dest);
+}

@@ -1,15 +1,25 @@
 NAME = miniRT
-SRCS = $(shell find $(source) -name '*.c')
+SOURCE = source/
+SRCS = $(shell find $(SOURCE) -name '*.c')
 OBJS = $(SRCS:.c=.o)
+LIBFT = includes/libft/libft.a
+LIBX = includes/42mlx/libmlx.a
+LIBX_OBJ = includes/42mlx/obj
 CFLAGS = -Wall -Wextra -Werror
-LIBS = -lmlx -lXext -lX11 -lm -lbsd
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	   cc $(SRCS) -I includes $(LIBS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(LIBX)
+	   cc $(SRCS) -I includes -o $(NAME)
+
+$(LIBFT):
+	make -C includes/libft
+
+$(LIBX):
+	make -C includes/42mlx
 
 clean:
+	rm -r -f $(LIBX_OBJ)
 	rm -f $(OBJS)
 
 fclean: clean

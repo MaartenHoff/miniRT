@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 21:01:21 by maahoff          ###   ########.fr       */
+/*   Created: 2025/02/16 19:57:28 by maahoff           #+#    #+#             */
+/*   Updated: 2025/02/16 20:33:40 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../includes/miniRT.h"
 
-# define WIDTH	1000
-# define HEIGHT	1000
+int	close_window(t_data *data)
+{
+	mlx_destroy_window(data->mlx, data->win);
+	free(data->mlx);
+	free(data);
+	exit(0);
+}
 
-# define ESC	65307
-
-# include "structs.h"
-# include "42mlx/mlx.h"
-# include "libft/libft.h"
-# include <stdlib.h>
-
-int	close_window(t_data *data);
-int	key_hook(int key_code, t_data *data);
-
-#endif
+int	key_hook(int key_code, t_data *data)
+{
+	if (key_code == ESC)
+		close_window(data);
+	return (0);
+}

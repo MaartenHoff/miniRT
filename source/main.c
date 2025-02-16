@@ -6,28 +6,27 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:42:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 19:47:44 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/02/16 20:19:08 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
-#include "../includes/structs.h"
 
-int	init_window(t_window *window)
+int	init_data(t_data *data)
 {
-	window->mlx = mlx_init();
-	if (!window->mlx)
+	data->mlx = mlx_init();
+	if (!data->mlx)
 		return (1);
-	window->win = mlx_new_window(window->mlx, WIDTH, HEIGHT, "miniRT");
-	if (!window->win)
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "miniRT");
+	if (!data->win)
 		return (1);
-	window->img = mlx_new_image(window->mlx, WIDTH, HEIGHT);
-	window->addr = mlx_get_data_addr(window->img, 
-			&window->bits_per_pixel, &window->line_length, &window->endian);
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->addr = mlx_get_data_addr(data->img, 
+			&data->bits_per_pixel, &data->line_length, &data->endian);
 	return (0);
 }
 
-void	fill_window(t_window *window)
+void	fill_window(t_data *data)
 {
 	int	x;
 	int	y;
@@ -41,26 +40,27 @@ void	fill_window(t_window *window)
 		while (x < WIDTH)
 		{
 			color = (0xFF << 16) | (0xFF * x / WIDTH);
-			pixel = y * (window->line_length / 4) + x;
-			*((int *)window->addr + pixel) = color;
+			pixel = y * (data->line_length / 4) + x;
+			*((int *)data->addr + pixel) = color;
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(window->mlx, window->win, window->img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
 int	main(void)
 {
-	t_window	*window;
+	t_data	*data;
 
-	window = malloc(sizeof(t_window));
-	if (init_window(window))
+	data = malloc(sizeof(t_data));
+	if (init_data(data))
 		return (1);
-	fill_window(window);
-	mlx_key_hook(window->win, (void *)exit, NULL);
-	mlx_loop(window->mlx);
-	free(window->mlx);
-	free(window);
+	fill_window(data);
+	mlx_key_hook(data->win, key_hook, data);
+	mlx_hook(data->win, 17, 0, close_window, data);
+	mlx_loop(data->mlx);
+	free(data->mlx);
+	free(data);
 	return (0);
 }

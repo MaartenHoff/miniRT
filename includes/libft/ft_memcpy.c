@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 21:01:21 by maahoff          ###   ########.fr       */
+/*   Created: 2023/11/15 14:41:14 by adiler            #+#    #+#             */
+/*   Updated: 2024/12/14 15:43:18 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# define WIDTH	1000
-# define HEIGHT	1000
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
 
-# define ESC	65307
-
-# include "structs.h"
-# include "42mlx/mlx.h"
-# include "libft/libft.h"
-# include <stdlib.h>
-
-int	close_window(t_data *data);
-int	key_hook(int key_code, t_data *data);
-
-#endif
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	d = dest;
+	s = src;
+	while (n > 0)
+	{
+		*(d++) = *(s++);
+		n--;
+	}
+	return (dest);
+}
