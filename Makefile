@@ -1,28 +1,37 @@
-NAME = miniRT
-SOURCE = source/
-SRCS = $(shell find $(SOURCE) -name '*.c')
-OBJS = $(SRCS:.c=.o)
-LIBFT = includes/libft/libft.a
-LIBX = includes/42mlx/libmlx.a
-LIBX_OBJ = includes/42mlx/obj
-CFLAGS = -Wall -Wextra -Werror
+NAME	= miniRT
+SOURCE	= source
+OBJDIR	= obj
+SRCS	= $(shell find $(SOURCE) -name '*.c')
+OBJS	= $(SRCS:$(SOURCE)/%.c=$(OBJDIR)/%.o)
+LIBFT	= includes/libft/libft.a
+LIBX	= includes/42mlx/libmlx.a
+
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror -Iincludes
+LDFLAGS	= -Lincludes/libft -lft -Lincludes/42mlx -lmlx -lm -lX11 -lXext
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(LIBX)
-	   cc $(SRCS) -I includes -o $(NAME)
+		$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+
+$(OBJDIR)/%.o: $(SOURCE)/%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	make -C includes/libft
+	$(MAKE) -C $(dir $(LIBFT))
 
 $(LIBX):
-	make -C includes/42mlx
+	$(MAKE) -C $(dir $(LIBX))
 
 clean:
-	rm -r -f $(LIBX_OBJ)
-	rm -f $(OBJS)
+	$(MAKE) -C $(dir $(LIBFT)) clean
+	$(MAKE) -C $(dir $(LIBX)) clean
+	rm -rf $(OBJDIR)
 
 fclean: clean
+	$(MAKE) -C $(dir $(LIBFT)) fclean
 	rm -f $(NAME)
 
 re: fclean all
