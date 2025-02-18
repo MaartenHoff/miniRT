@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_strn.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 21:01:21 by maahoff          ###   ########.fr       */
+/*   Created: 2024/12/12 16:43:50 by maahoff           #+#    #+#             */
+/*   Updated: 2024/12/29 10:30:26 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# define WIDTH	1000
-# define HEIGHT	1000
+char	*ft_strndup(char *str, int n)
+{
+	char	*new_str;
+	int		i;
 
-# define ESC	65307
-
-# include "structs.h"
-# include "42mlx/mlx.h"
-# include "libft/libft.h"
-# include <stdlib.h>
-
-int	close_window(t_data *data);
-int	key_hook(int key_code, t_data *data);
-
-#endif
+	if (!str || !n)
+		return (NULL);
+	new_str = malloc(sizeof(char) * (n + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
+}

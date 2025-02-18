@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:51:53 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 19:52:27 by maahoff          ###   ########.fr       */
+/*   Created: 2023/11/15 14:14:25 by adiler            #+#    #+#             */
+/*   Updated: 2023/12/11 16:56:09 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "libft.h"
 
-typedef struct s_data
+void	ft_bzero(void *s, size_t n)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
+	char	*p;
 
-#endif
+	p = (char *)s;
+	while (n > 0)
+	{
+		p[n - 1] = 0;
+		n--;
+	}
+}

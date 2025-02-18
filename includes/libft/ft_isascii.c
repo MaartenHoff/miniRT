@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:51:53 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 19:52:27 by maahoff          ###   ########.fr       */
+/*   Created: 2023/11/14 15:41:52 by adiler            #+#    #+#             */
+/*   Updated: 2023/12/05 12:00:18 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "libft.h"
 
-typedef struct s_data
+int	ft_isascii(int ch)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
-
-#endif
+	if (ch >= 0 && ch <= 127)
+		return (1);
+	else
+		return (0);
+}

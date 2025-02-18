@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:51:53 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 19:52:27 by maahoff          ###   ########.fr       */
+/*   Created: 2023/11/23 15:14:24 by adiler            #+#    #+#             */
+/*   Updated: 2023/12/11 17:33:12 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "libft.h"
 
-typedef struct s_data
+char	*ft_strdup(const char *s)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
+	size_t	len;
+	char	*str;
 
-#endif
+	len = ft_strlen(s);
+	str = malloc(len + 1);
+	if (!str)
+		return (NULL);
+	return (ft_memcpy(str, s, len + 1));
+}

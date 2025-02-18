@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 21:01:21 by maahoff          ###   ########.fr       */
+/*   Created: 2023/11/24 13:21:19 by adiler            #+#    #+#             */
+/*   Updated: 2024/12/20 15:49:07 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# define WIDTH	1000
-# define HEIGHT	1000
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	char	*str;
 
-# define ESC	65307
-
-# include "structs.h"
-# include "42mlx/mlx.h"
-# include "libft/libft.h"
-# include <stdlib.h>
-
-int	close_window(t_data *data);
-int	key_hook(int key_code, t_data *data);
-
-#endif
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	i = 0;
+	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
+		return (NULL);
+	while (*s1)
+	{
+		str[i] = *s1;
+		s1++;
+		i++;
+	}
+	while (*s2)
+	{
+		str[i] = *s2;
+		s2++;
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}

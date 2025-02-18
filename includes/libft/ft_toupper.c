@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:51:53 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 19:52:27 by maahoff          ###   ########.fr       */
+/*   Created: 2023/11/21 12:43:12 by adiler            #+#    #+#             */
+/*   Updated: 2023/12/05 14:28:10 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "libft.h"
 
-typedef struct s_data
+int	ft_toupper(int c)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
-
-#endif
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	else
+		return (c);
+}
