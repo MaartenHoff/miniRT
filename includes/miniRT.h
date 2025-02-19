@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/19 16:51:47 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/02/19 17:27:55 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@
 # define ERR_INVAL	22		// Invalid argument
 # define ERR_ARGC	128		// Wrong number of arguments
 
+# include <stdlib.h>
+# include <stdio.h>	
+# include <fcntl.h>
+# include <unistd.h>
 # include "structs.h"
 # include "42mlx/mlx.h"
 # include "libft/libft.h"
-# include <stdlib.h>
+
 
 // ray_handling
 int	send_ray(t_mlx_data *mlx_data, t_map *map);
 
 // init
-int		init(t_mlx_data *mlx_data, t_map **map, int argc, char **argv);
+int		init(t_mlx_data **mlx_data, t_map **map, int argc, char **argv);
 
 // hooks
 int		close_window(t_mlx_data *mlx_data);
