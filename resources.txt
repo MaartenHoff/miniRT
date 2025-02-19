@@ -1,8 +1,7 @@
-https://www.youtube.com/watch?v=1HYhrx9bzP8
 https://github.com/Xperaz/minirt?tab=readme-ov-file#description
-https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere
-https://42-cursus.gitbook.io/guide/rank-04/minirt/understand-minirt
-https://github.com/ssloy/tinyraytracer/wiki/Part-1:-understandable-raytracing
 https://www.gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html
+https://computergraphicsguide.blogspot.com/2015/08/raycasting-and-phong-shading.html
 https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
-https://medium.com/@iremoztimur/building-a-minirt-42-project-part-1-ae7a00aebdb9
+https://mrl.cs.nyu.edu/~dzorin/rend05/lecture2.pdf
+https://mrl.cs.nyu.edu/~dzorin/rend05/lecture1a.pdf
+https://raytracing.github.io/books/RayTracingInOneWeekend.html#rays,asimplecamera,andbackground
