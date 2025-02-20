@@ -243,64 +243,78 @@ int	init_sphere(char **params, t_map **map)
 	return (error_check);
 }
 
-int	init_plane(char **params, t_map **map)
+int alloc_plane(t_objects **objects)
 {
-	t_objects	*objects;
-	t_planes	*plane;
-	char		**split;
-	int			error_check;
+    t_planes *plane;
 
-	error_check = 0;
-	objects = malloc(sizeof(t_objects));
-	if (!objects)
-		return (ERR_NOMEM);
-	plane = malloc(sizeof(t_planes));
-	if (!plane)
-		free_map(*map);
-	plane->point = split_coords(params[1]);
-	if (!plane->point)
-		free_map(*map);
-	plane->vector = split_coords(params[2]);
-	if (!plane->vector)
-		free_map(*map);
-	plane->color = split_color(params[3]);
-	if (!plane->color)
-		free_map(*map);
-	objects->type = PLANE;
-	objects->plane = plane;
-	objects->next = NULL;
-	ft_lstadd_back(&(*map)->objects, objects);
-	return (error_check);
+    *objects = malloc(sizeof(t_objects));
+    if (!(*objects))
+        return (ERR_NOMEM);
+    plane = malloc(sizeof(t_planes));
+    if (!plane)
+        return (ERR_NOMEM);
+    (*objects)->type = PLANE;
+    (*objects)->plane = plane;
+    (*objects)->next = NULL;
+    return (0);
+}
+
+int alloc_cylinder(t_objects **objects)
+{
+    t_cylinder *cylinder;
+
+    *objects = malloc(sizeof(t_objects));
+    if (!(*objects))
+        return (ERR_NOMEM);
+    cylinder = malloc(sizeof(t_cylinder));
+    if (!cylinder)
+        return (ERR_NOMEM);
+    (*objects)->type = CYLINDER;
+    (*objects)->cylinder = cylinder;
+    (*objects)->next = NULL;
+    return (0);
+}
+
+int init_plane(char **params, t_map **map)
+{
+    t_objects *objects;
+    int error_check = alloc_plane(&objects);
+    if (error_check)
+        return error_check;
+    
+    objects->plane->point = split_coords(params[1]);
+    if (!objects->plane->point)
+        free_map(*map);
+    objects->plane->vector = split_coords(params[2]);
+    if (!objects->plane->vector)
+        free_map(*map);
+    objects->plane->color = split_color(params[3]);
+    if (!objects->plane->color)
+        free_map(*map);
+    
+    ft_lstadd_back(&(*map)->objects, objects);
+    return 0;
 }
 
 int init_cylinder(char **params, t_map **map)
 {
-	t_objects	*objects;
-	t_cylinder	*cylinder;
-	char		**split;
-	int			error_check;
-
-	error_check = 0;
-	objects = malloc(sizeof(t_objects));
-	if (!objects)
-		return (ERR_NOMEM);
-	cylinder = malloc(sizeof(t_cylinder));
-	if (!cylinder)
-		free_map(*map);
-	cylinder->base = split_coords(params[1]);
-	if (!cylinder->base)
-		free_map(*map);
-	cylinder->vector = split_coords(params[2]);
-	if (!cylinder->vector)
-		free_map(*map);
-	cylinder->diameter = ft_atoi(params[3]);
-	cylinder->height = ft_atoi(params[4]);
-	cylinder->color = split_color(params[5]);
-	if (!cylinder->color)
-		free_map(*map);
-	objects->type = CYLINDER;
-	objects->cylinder = cylinder;
-	objects->next = NULL;
-	ft_lstadd_back(&(*map)->objects, objects);
-	return (error_check);
+    t_objects *objects;
+    int error_check = alloc_cylinder(&objects);
+    if (error_check)
+        return error_check;
+    
+    objects->cylinder->base = split_coords(params[1]);
+    if (!objects->cylinder->base)
+        free_map(*map);
+    objects->cylinder->vector = split_coords(params[2]);
+    if (!objects->cylinder->vector)
+        free_map(*map);
+    objects->cylinder->diameter = ft_atoi(params[3]);
+    objects->cylinder->height = ft_atoi(params[4]);
+    objects->cylinder->color = split_color(params[5]);
+    if (!objects->cylinder->color)
+        free_map(*map);
+    
+    ft_lstadd_back(&(*map)->objects, objects);
+    return 0;
 }
