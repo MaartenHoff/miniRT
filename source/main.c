@@ -35,8 +35,8 @@ int	main(int argc, char **argv)
 	if (init(&mlx_data, &map, argc, argv))
 		return (1);
 	fill_window(mlx_data, map);
-	free(map);
 	mlx_key_hook(mlx_data->win, key_hook, mlx_data);
+	mlx_hook(mlx_data->win, 17, 0, close_window, mlx_data);
 	mlx_loop(mlx_data->mlx);
 	return (0);
 }
