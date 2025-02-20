@@ -44,41 +44,10 @@ int	fill_params(int fd, char ****params)
 
 int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-	char	***params;
-	int		error_check;
-	
-	error_check = 0;
-	//opne file get fd
-	//getlines from file
-	//convert lines
-	init_mlx_data(mlx_data);
-	params = (char ***)malloc(GROUPS * sizeof(char **));
-	for (int i = 0; i < GROUPS; i++)
-	{
-		params[i] = (char **)malloc(FEATURES * sizeof(char *));
-		for (int j = 0; j < FEATURES; j++)
-		{
-			params[i][j] = NULL;
-		}
-	}
-	
-	params[0] = (char *[]){"A", "0.0", "255,255,255", NULL, NULL, NULL, NULL};
-	params[1] = (char *[]){"C", "50,30,20", "0,0,1", "50", NULL, NULL, NULL};
-	params[2] = (char *[]){"L", "0,0,20", "0.5", "255,255,255", NULL, NULL, NULL};
-	params[3] = (char *[]){"sp", "0,0,20", "10", "255,0,0", NULL, NULL, NULL};
-	params[4] = (char *[]){"pl", "0,0,0", "0,0,1", "255,0,0", NULL, NULL, NULL};
-	params[5] = (char *[]){"cy", "0,0,5", "0,0,1", "10", "10", "255,0,0", NULL};
-	params[6] = NULL;
-
-	error_check = init_map(params, map);
 	int		error_check;
 	int		fd;
 	char	***params;
-
-	(void)map;
-	(void)mlx_data;
+	
 	fd = -1;
 	error_check = open_file(argc, argv, &fd);
 	if (error_check)
@@ -86,9 +55,8 @@ int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv)
 	error_check = fill_params(fd, &params);
 	if (error_check)
 		return (error_check);
-	//convert 
-	//init_map
-	//init_mlx_data
+	init_mlx_data(mlx_data);
+	error_check = init_map(params, map);
 	return (error_check);
 }
 
@@ -145,7 +113,7 @@ int	init_ambient(char **params, t_map **map)
 	return (error_check);
 }
 
-int init_camera(char **params, t_map **map)
-{
+// int init_camera(char **params, t_map **map)
+// {
 	
-}
+// }
