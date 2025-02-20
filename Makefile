@@ -1,6 +1,6 @@
 NAME	= miniRT
 SOURCE	= source
-OBJDIR	= obj
+OBJDIR	= .obj
 SRCS	= $(shell find $(SOURCE) -name '*.c')
 OBJS	= $(SRCS:$(SOURCE)/%.c=$(OBJDIR)/%.o)
 LIBFT	= includes/libft/libft.a
