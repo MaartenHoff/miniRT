@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/20 16:45:23 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:52:36 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@
 int	send_ray(t_mlx_data *mlx_data, t_map *map);
 
 // init
-int		init(t_mlx_data **mlx_data, t_map **map, int argc, char **argv);
+int	init_mlx_data(t_mlx_data **mlx_data);
 
 // hooks
 int		close_window(t_mlx_data *mlx_data);
 int		key_hook(int key_code, t_mlx_data *mlx_data);
+
+// parser
+int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv);
 
 #endif
