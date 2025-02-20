@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:43:14 by adiler            #+#    #+#             */
-/*   Updated: 2025/01/21 19:03:43 by adiler           ###   ########.fr       */
+/*   Updated: 2025/02/20 18:25:57 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list_str	*create_new_node(char *buffer, int start, int len)
+t_gnl	*create_new_node(char *buffer, int start, int len)
 {
 	char		*line;
-	t_list_str	*new_node;
+	t_gnl		*new_node;
 	int			i;
 
 	line = malloc(sizeof(char) * (len + 1));
@@ -28,7 +28,7 @@ t_list_str	*create_new_node(char *buffer, int start, int len)
 		i++;
 	}
 	line[i] = 0;
-	new_node = malloc(sizeof(t_list_str));
+	new_node = malloc(sizeof(t_gnl));
 	if (!new_node)
 	{
 		free(line);
@@ -39,10 +39,10 @@ t_list_str	*create_new_node(char *buffer, int start, int len)
 	return (new_node);
 }
 
-t_list_str	*split_and_store_line(t_list_str **head, char *buffer)
+t_gnl	*split_and_store_line(t_gnl **head, char *buffer)
 {
 	size_t		i;
-	t_list_str	*new_node;
+	t_gnl		*new_node;
 	size_t		start;
 	size_t		len;
 
@@ -60,7 +60,7 @@ t_list_str	*split_and_store_line(t_list_str **head, char *buffer)
 			new_node = create_new_node(buffer, start, len);
 			if (!new_node)
 				return (NULL);
-			ft_lstadd_back_c(head, new_node);
+			gnl_lstadd_back_c(head, new_node);
 		}
 		if (buffer[i])
 			i++;
@@ -68,7 +68,7 @@ t_list_str	*split_and_store_line(t_list_str **head, char *buffer)
 	return (new_node);
 }
 
-int	read_split_and_store_line(int fd, t_list_str **head)
+int	read_split_and_store_line(int fd, t_gnl **head)
 {
 	int		bytes_read;
 	char	*buf;
@@ -95,9 +95,9 @@ int	read_split_and_store_line(int fd, t_list_str **head)
 	return (bytes_read);
 }
 
-char	*pop_and_join(t_list_str **head, char *line)
+char	*pop_and_join(t_gnl **head, char *line)
 {
-	t_list_str	*first;
+	t_gnl		*first;
 	char		*temp_line;
 	char		*new_line;
 
@@ -107,7 +107,7 @@ char	*pop_and_join(t_list_str **head, char *line)
 	temp_line = first->line;
 	*head = first->next;
 	free(first);
-	new_line = ft_strjoin(line, temp_line);
+	new_line = gnl_strjoin(line, temp_line);
 	free(line);
 	free(temp_line);
 	if (!new_line)
@@ -117,7 +117,7 @@ char	*pop_and_join(t_list_str **head, char *line)
 
 char	*get_next_line(int fd)
 {
-	static t_list_str	*head;
+	static t_gnl		*head;
 	char				*line;
 	int					read_result;
 
@@ -132,42 +132,8 @@ char	*get_next_line(int fd)
 				return (line);
 		}
 		line = pop_and_join(&head, line);
-		if (line == NULL || ft_strchr(line, '\n'))
+		if (line == NULL || gnl_strchr(line, '\n'))
 			break ;
 	}
 	return (line);
 }
-
-// void print(const char *str) {
-// 	if (str == NULL) {
-// 		printf("(null)\n");
-// 		return ;
-// 	}
-// 	for (int i = 0; str[i] != '\0'; ++i) {
-// 		if (str[i] == '\n') {
-// 			printf("\\n");
-// 		} else {
-// 			putchar(str[i]);
-// 		}
-// 	}
-// 	printf("\n");
-// }
-// int main()
-// {
-// 	int	fd;
-// 	fd = open("test.txt", O_RDONLY);
-// 	char *line;
-// 	for (int i = 0; i < 10; ++i) {
-// 		line = get_next_line(fd);
-// 		printf("Returned line: \n");
-// 		print(line);
-// 		free(line);
-// 	}
-// }
-// void print_list_str(t_list_str *list) {
-// 	while (list) {
-// 		printf("List Node:\n"); // Assuming each node has a 'line' member
-// 		print(list->line);
-// 		list = list->next;
-// 	}
-// }

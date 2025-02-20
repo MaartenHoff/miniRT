@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:18:05 by adiler            #+#    #+#             */
-/*   Updated: 2024/11/27 20:19:29 by adiler           ###   ########.fr       */
+/*   Updated: 2025/02/20 18:26:16 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	while (*s)
 	{
@@ -25,7 +25,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*gnl_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char		*d;
 	const unsigned char	*s;
@@ -42,7 +42,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gnl_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	int		len1;
@@ -57,15 +57,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str = malloc(len1 + len2 + 1);
 	if (!str)
 		return (NULL);
-	ft_memcpy(str, s1, len1);
-	ft_memcpy(str + len1, s2, len2);
+	gnl_memcpy(str, s1, len1);
+	gnl_memcpy(str + len1, s2, len2);
 	str[len1 + len2] = '\0';
 	return (str);
 }
 
-void	ft_lstadd_back_c(t_list_str **lst, t_list_str *new_node)
+void	gnl_lstadd_back_c(t_gnl **lst, t_gnl *new_node)
 {
-	t_list_str	*current;
+	t_gnl	*current;
 
 	if (lst == NULL)
 		return ;
@@ -80,9 +80,9 @@ void	ft_lstadd_back_c(t_list_str **lst, t_list_str *new_node)
 	}
 }
 
-void	handle_read_result(int result, t_list_str **head, char **line)
+void	handle_read_result(int result, t_gnl **head, char **line)
 {
-	t_list_str	*tmp;
+	t_gnl	*tmp;
 
 	if (result <= 0)
 	{
