@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:18:56 by adiler            #+#    #+#             */
-/*   Updated: 2025/02/20 18:27:40 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:06:45 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int						ft_arrlen(char **arr);
 char					*ft_strcat(char *dest, const char *src);
 int						ft_isspace(int c);
 char					*get_next_line(int fd);
+void					ft_free_array(char **array);
+double					ft_atof(char *str);
 
 
 #endif

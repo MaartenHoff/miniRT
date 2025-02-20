@@ -93,6 +93,48 @@ int	init_map(char ***params, t_map **map)
 	return (0);
 }
 
+t_coords *split_coords(char *str)
+{
+	t_coords	*coords;
+	char		**split;
+
+	coords = malloc(sizeof(t_coords));
+	if (!coords)
+		return (NULL);
+	split = ft_split(str, ',');
+	if (!split)
+	{
+		free(coords);
+		return (NULL);
+	}
+	coords->x = ft_atoi(split[0]);
+	coords->y = ft_atoi(split[1]);
+	coords->z = ft_atoi(split[2]);
+	ft_free_array(split);
+	return (coords);
+}
+
+t_color *split_color(char *str)
+{
+	t_color	*color;
+	char	**split;
+
+	color = malloc(sizeof(t_color));
+	if (!color)
+		return (NULL);
+	split = ft_split(str, ',');
+	if (!split)
+	{
+		free(color);
+		return (NULL);
+	}
+	color->r = ft_atoi(split[0]);
+	color->g = ft_atoi(split[1]);
+	color->b = ft_atoi(split[2]);
+	ft_free_array(split);
+	return (color);
+}
+
 int	init_ambient(char **params, t_map **map)
 {
 	t_ambient	*ambient;
@@ -103,17 +145,162 @@ int	init_ambient(char **params, t_map **map)
 	ambient = malloc(sizeof(t_ambient));
 	if (!ambient)
 		return (ERR_NOMEM);
-	split = ft_split(params[1], ',');
-	ambient->brightness = ft_atof(split[0]); //ft_atof
-	split = ft_split(params[2], ',');
-	ambient->color.r = ft_atoi(split[0]);
-	ambient->color.g = ft_atoi(split[1]);
-	ambient->color.b = ft_atoi(split[2]);
+	ambient->brightness = ft_atof(params[1]);
+	ambient->color = split_color(params[2]);
+	if (!ambient->color)
+	{
+		free(ambient);
+		return (ERR_NOMEM);
+	}
+
 	(*map)->ambient = ambient;
 	return (error_check);
 }
 
-// int init_camera(char **params, t_map **map)
-// {
-	
-// }
+int init_camera(char **params, t_map **map)
+{
+	t_camera	*camera;
+	char		**split;
+	int			error_check;
+
+	error_check = 0;
+	camera = malloc(sizeof(t_camera));
+	if (!camera)
+		return (ERR_NOMEM);
+	camera->coords = split_coords(params[1]);
+	if (!camera->coords)
+	{
+		free(camera);
+		return (ERR_NOMEM);
+	}
+	camera->vector = split_coords(params[2]);
+	if (!camera->vector)
+	{
+		free(camera->coords);
+		free(camera);
+		return (ERR_NOMEM);
+	}
+	camera->fov = ft_atoi(params[3]);
+	(*map)->camera = camera;
+	return (error_check);
+}
+
+int	init_light(char **params, t_map **map)
+{
+	t_light		*light;
+	char		**split;
+	int			error_check;
+
+	error_check = 0;
+	light = malloc(sizeof(t_light));
+	if (!light)
+		return (ERR_NOMEM);
+	light->source = split_coords(params[1]);
+	if (!light->source)
+		free_map(*map);
+	light->brightness = ft_atof(params[2]);
+	light->color = split_color(params[3]);
+	if (!light->color)
+		free_map(*map);
+	(*map)->light = light;
+	return (error_check);
+}
+
+int	alloc_shere(t_objects **objects)
+{
+	t_spheres	*spheres;
+
+	*objects = malloc(sizeof(t_objects));
+	if (!(*objects))
+		return (ERR_NOMEM);
+	spheres = malloc(sizeof(t_spheres));
+	if (!spheres)
+		return (ERR_NOMEM);
+	(*objects)->type = SPHERE;
+	(*objects)->spheres = spheres;
+	(*objects)->next = NULL;
+	return (0);
+}
+
+int	init_sphere(char **params, t_map **map)
+{
+	t_objects	*objects;
+	char		**split;
+	int			error_check;
+
+	error_check = 0;
+	objects = alloc_sphere(map);
+	if (!objects)
+		return (error_check);
+	objects->spheres->center = split_coords(params[1]);
+	if (!objects->spheres->center)
+		free_map(*map);
+	objects->spheres->diameter = ft_atoi(params[2]);
+	objects->spheres->color = split_color(params[3]);
+	if (!objects->spheres->color)
+		free_map(*map);
+	ft_lstadd_back(&(*map)->objects, objects);
+	return (error_check);
+}
+
+int	init_plane(char **params, t_map **map)
+{
+	t_objects	*objects;
+	t_planes	*plane;
+	char		**split;
+	int			error_check;
+
+	error_check = 0;
+	objects = malloc(sizeof(t_objects));
+	if (!objects)
+		return (ERR_NOMEM);
+	plane = malloc(sizeof(t_planes));
+	if (!plane)
+		free_map(*map);
+	plane->point = split_coords(params[1]);
+	if (!plane->point)
+		free_map(*map);
+	plane->vector = split_coords(params[2]);
+	if (!plane->vector)
+		free_map(*map);
+	plane->color = split_color(params[3]);
+	if (!plane->color)
+		free_map(*map);
+	objects->type = PLANE;
+	objects->plane = plane;
+	objects->next = NULL;
+	ft_lstadd_back(&(*map)->objects, objects);
+	return (error_check);
+}
+
+int init_cylinder(char **params, t_map **map)
+{
+	t_objects	*objects;
+	t_cylinder	*cylinder;
+	char		**split;
+	int			error_check;
+
+	error_check = 0;
+	objects = malloc(sizeof(t_objects));
+	if (!objects)
+		return (ERR_NOMEM);
+	cylinder = malloc(sizeof(t_cylinder));
+	if (!cylinder)
+		free_map(*map);
+	cylinder->base = split_coords(params[1]);
+	if (!cylinder->base)
+		free_map(*map);
+	cylinder->vector = split_coords(params[2]);
+	if (!cylinder->vector)
+		free_map(*map);
+	cylinder->diameter = ft_atoi(params[3]);
+	cylinder->height = ft_atoi(params[4]);
+	cylinder->color = split_color(params[5]);
+	if (!cylinder->color)
+		free_map(*map);
+	objects->type = CYLINDER;
+	objects->cylinder = cylinder;
+	objects->next = NULL;
+	ft_lstadd_back(&(*map)->objects, objects);
+	return (error_check);
+}
