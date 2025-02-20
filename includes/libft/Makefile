@@ -6,13 +6,13 @@
 #    By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 12:44:41 by adiler            #+#    #+#              #
-#    Updated: 2025/02/16 20:44:50 by maahoff          ###   ########.fr        #
+#    Updated: 2025/02/20 13:10:09 by maahoff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRCS = $(shell find source -type f -name "*.c")
+SRCS = $(shell find -type f -name "*.c")
 
 OBJS = $(SRCS:.c=.o)
 
