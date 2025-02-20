@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 18:18:08 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/20 18:42:23 by maahoff          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -42,10 +30,14 @@ int		send_ray(t_mlx_data *mlx_data, t_map *map);
 // parser
 int		parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv);
 char	**tokenizer(char *line);
-int		init(t_mlx_data **mlx_data, t_map **map, int argc, char **argv);
+// init
+int	init_mlx_data(t_mlx_data **mlx_data);
 
 // hooks
 int		close_window(t_mlx_data *mlx_data);
 int		key_hook(int key_code, t_mlx_data *mlx_data);
+
+// parser
+int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv);
 
 #endif

@@ -23,6 +23,7 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 		y++;
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
+	printf("fill_window\n");
 }
 
 int	main(int argc, char **argv)
