@@ -36,10 +36,10 @@ int	main(int argc, char **argv)
 	error_check = parser(&mlx_data, &map, argc, argv);
 	if (error_check)
 		return (1); //print_error
-	fill_window(mlx_data, map);
-	free(map); // free_map ft
-	mlx_key_hook(mlx_data->win, key_hook, mlx_data);
-	mlx_hook(mlx_data->win, 17, 0, close_window, mlx_data);
-	mlx_loop(mlx_data->mlx);
+	// fill_window(mlx_data, map);
+	// free(map); // free_map ft
+	// mlx_key_hook(mlx_data->win, key_hook, mlx_data);
+	// mlx_hook(mlx_data->win, 17, 0, close_window, mlx_data);
+	// mlx_loop(mlx_data->mlx);
 	return (0);
 }
