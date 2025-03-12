@@ -1,8 +1,5 @@
 #include "../../includes/miniRT.h"
 
-#define GROUPS 60
-#define FEATURES 6
-
 int	open_file(int argc, char **argv, int *fd)
 {
 	if (argc != 2)

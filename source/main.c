@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 	error_check = parser(&mlx_data, &map, argc, argv);
 	if (error_check)
 		return (1); //print_error
+	print_map(map);
 	fill_window(mlx_data, map);
 	free(map); // free_map ft
 	mlx_key_hook(mlx_data->win, key_hook, mlx_data);
