@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:42:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/16 21:42:51 by adiler           ###   ########.fr       */
+/*   Updated: 2025/03/14 15:42:08 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	fill_window(t_window *window)
 			if (ray_hit(x, y, camera, sphere))
 				color = sphere.color;
 			else
-				color = 0xFFFFFF;
+				color = 0x000000;
 			pixel = y * (window->line_length / 4) + x;
 			*((int *)window->addr + pixel) = color;	
 			x++;
