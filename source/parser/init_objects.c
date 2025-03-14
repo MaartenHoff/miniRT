@@ -65,22 +65,28 @@ int	add_cylinder(char **params, t_objects **objects)
 
 int	another_object(char **params, t_map **map)
 {
-	t_objects	*start;
+	t_objects	*new_object;
+	t_objects	*tmp;
 	int			error_check;
 
-	start = (*map)->objects;
-	while ((*map)->objects)
-		(*map)->objects = (*map)->objects->next;
-	(*map)->objects = malloc(sizeof(t_objects));
-	if (!(*map)->objects)
+	new_object = malloc(sizeof(t_objects));
+	if (!new_object)
 		return (ERR_NOMEM);
-	(*map)->objects->next = NULL;
+	new_object->next = NULL;
 	if (!ft_strcmp(params[0], "sp"))
-		error_check = add_sphere(params, &(*map)->objects);
+		error_check = add_sphere(params, &new_object);
 	else if (!ft_strcmp(params[0], "pl"))
-		error_check = add_plane(params, &(*map)->objects);
+		error_check = add_plane(params, &new_object);
 	else
-		error_check = add_cylinder(params, &(*map)->objects);
-	(*map)->objects = start;
+		error_check = add_cylinder(params, &new_object);
+	if ((*map)->objects == NULL)
+		(*map)->objects = new_object;
+	else if (!error_check)
+	{
+		tmp = (*map)->objects;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_object;
+	}
 	return (error_check);
 }

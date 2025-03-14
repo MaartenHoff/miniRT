@@ -23,7 +23,6 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 		y++;
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
-	printf("fill_window\n");
 }
 
 int	main(int argc, char **argv)
@@ -36,10 +35,10 @@ int	main(int argc, char **argv)
 	map = NULL;
 	error_check = parser(&mlx_data, &map, argc, argv);
 	if (error_check)
-		return (1); //print_error
+		return (handle_error(error_check, map));
 	print_map(map);
 	fill_window(mlx_data, map);
-	free(map); // free_map ft
+	free_map(map);
 	mlx_key_hook(mlx_data->win, key_hook, mlx_data);
 	mlx_hook(mlx_data->win, 17, 0, close_window, mlx_data);
 	mlx_loop(mlx_data->mlx);

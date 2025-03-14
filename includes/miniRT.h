@@ -48,8 +48,12 @@ char		**tokenizer(char *line);
 t_coords	*split_coords(char *str);
 t_color		*split_color(char *str);
 
+// error
+int			handle_error(int error_code, t_map *map);
+
 // free
 void		free_map(t_map *map);
+void		free_params(char ***params);
 
 // testing
 void		print_map(t_map *map);
