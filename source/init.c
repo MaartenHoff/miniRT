@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:30:16 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/20 17:06:30 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:52:40 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,5 @@ int	init_mlx_data(t_mlx_data **mlx_data)
 	(*mlx_data)->addr = mlx_get_data_addr((*mlx_data)->img,
 			&(*mlx_data)->bits_per_pixel, &(*mlx_data)->line_length,
 			&(*mlx_data)->endian);
-	return (0);
-}
-
-int	init_map(t_map **map, int argc, char **argv)
-{
-	if (!argc || !argv)
-		return (1);
-	*map = malloc(sizeof(t_map));
-	if (!map)
-		return (ERR_NOMEM);
-	(*map)->light = NULL;
-	(*map)->objects = NULL;
-	return (0);
-}
-
-int	init(t_mlx_data **mlx_data, t_map **map, int argc, char **argv)
-{
-	int	error_check;
-
-	error_check = init_mlx_data(mlx_data);
-	if (error_check)
-		return (error_check);
-	error_check = init_map(map, argc, argv);
-	if (error_check)
-	{
-		free((*mlx_data)->mlx);
-		return (free(mlx_data), error_check);
-	}
 	return (0);
 }

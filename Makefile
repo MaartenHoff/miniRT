@@ -16,7 +16,7 @@ $(NAME): $(OBJS) $(LIBFT) $(LIBX)
 		$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SOURCE)/%.c
-	@mkdir -p $(OBJDIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):

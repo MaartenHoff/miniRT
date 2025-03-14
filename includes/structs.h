@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:51:53 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/20 16:47:37 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/02/20 19:48:36 by adiler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@ typedef struct s_color
 
 typedef struct s_spheres
 {
-	t_coords	center;
+	t_coords	*center;
 	double		diameter;
-	t_color		color;
+	t_color		*color;
 }	t_spheres;
 
 typedef struct s_planes
 {
-	t_coords	point;
-	t_coords	vector;
-	t_color		color;
+	t_coords	*point;
+	t_coords	*vector;
+	t_color		*color;
 }	t_planes;
 
 typedef struct s_cylinder
 {
-	t_coords	base;
-	t_coords	vector;
+	t_coords	*base;
+	t_coords	*vector;
 	double		diameter;
 	double		height;
-	t_color		color;
+	t_color		*color;
 }	t_cylinder;
 
 typedef struct s_objects
@@ -61,22 +61,22 @@ typedef struct s_objects
 
 typedef struct s_light
 {
-	t_coords	source;
+	t_coords	*source;
 	double		brightness;
-	t_color		color;
+	t_color		*color;
 }	t_light;
 
 typedef struct s_camera
 {
-	t_coords	coords;
-	t_coords	vector;
+	t_coords	*coords;
+	t_coords	*vector;
 	int			fov;
 }	t_camera;
 
 typedef struct s_ambient
 {
 	double	brightness;
-	t_color	color;
+	t_color	*color;
 }	t_ambient;
 
 typedef struct s_map

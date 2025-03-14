@@ -6,11 +6,11 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:53:22 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/20 18:47:03 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/03/10 16:44:23 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../../includes/miniRT.h"
 
 static int	is_whitespace(char c)
 {
