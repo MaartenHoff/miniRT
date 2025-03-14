@@ -1,5 +1,27 @@
 #include "../includes/miniRT.h"
 
+void	free_params(char ***params)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (!params)
+		return ;
+	while (params[i])
+	{
+		j = 0;
+		while (params[i][j])
+		{
+			ft_memdel((void **)&params[i][j]);
+			j++;
+		}
+		ft_memdel((void **)&params[i]);
+		i++;
+	}
+	free(params);
+}
+
 void	free_sphere(t_spheres *sphere)
 {
 	if (!sphere)
@@ -39,17 +61,22 @@ void	free_cylinder(t_cylinder *cylinder)
 
 void	free_map(t_map *map)
 {
-	t_objects	*tmp_obj;
-	tmp_obj = map->objects;
-	while (tmp_obj)
+	t_objects	*temp;
+
+	if (!map)
+		return ;
+	temp = map->objects;
+	while (temp)
 	{
-		if (tmp_obj->type == SPHERE)
-			free_sphere(tmp_obj->spheres);
-		else if (tmp_obj->type == PLANE)
-			free_plane(tmp_obj->plane);
-		else if (tmp_obj->type == CYLINDER)
-			free_cylinder(tmp_obj->cylinder);
-		tmp_obj = tmp_obj->next;
+		if (temp->type == SPHERE)
+			free_sphere(temp->spheres);
+		else if (temp->type == PLANE)
+			free_plane(temp->plane);
+		else if (temp->type == CYLINDER)
+			free_cylinder(temp->cylinder);
+		ft_memdel((void **)&(map->objects));
+		temp = temp->next;
+		map->objects = temp;
 	}
 	free(map->ambient->color);
 	free(map->ambient);
@@ -61,5 +88,3 @@ void	free_map(t_map *map)
 	free(map->light);
 	free(map);
 }
-
-	

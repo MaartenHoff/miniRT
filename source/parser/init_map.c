@@ -40,12 +40,12 @@ int	init_light(char **params, t_map **map)
 	if (!light)
 		return (ERR_NOMEM);
 	light->source = split_coords(params[1]);
-	if (!light->source)
-		free_map(*map);
+	if (params[1] && !light->source)
+		return (ERR_NOMEM);
 	light->brightness = ft_atof(params[2]);
 	light->color = split_color(params[3]);
-	if (!light->color)
-		free_map(*map);
+	if (params[3] && !light->color)
+		return (ERR_NOMEM);
 	(*map)->light = light;
 	return (error_check);
 }
@@ -79,18 +79,16 @@ int	init_groups(char ***params, t_map **map)
 	groups = 0;
 	while (params[groups] && !error_check)
 	{
-		if (ft_strcmp(params[groups][0], "A"))
+		if (!ft_strcmp(params[groups][0], "A"))
 			error_check = init_ambient(params[groups], map);
-		else if (ft_strcmp(params[groups][0], "C"))
+		else if (!ft_strcmp(params[groups][0], "C"))
 			error_check = init_camera(params[groups], map);
-		else if (ft_strcmp(params[groups][0], "L"))
+		else if (!ft_strcmp(params[groups][0], "L"))
 			error_check = init_light(params[groups], map);
-		else if (ft_strcmp(params[groups][0], "sp"))
-			error_check = init_sphere(params[groups], map);
-		else if (ft_strcmp(params[groups][0], "pl"))
-			error_check = init_plane(params[groups], map);
-		else if (ft_strcmp(params[groups][0], "cy"))
-			error_check = init_cylinder(params[groups], map);
+		else if (!ft_strcmp(params[groups][0], "sp") || 
+			!ft_strcmp(params[groups][0], "pl") || 
+				!ft_strcmp(params[groups][0], "cy"))
+			error_check = another_object(params[groups], map);
 		groups++;
 	}
 	return (error_check);
