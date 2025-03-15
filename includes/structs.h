@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiler <adiler@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:51:53 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/20 19:48:36 by adiler           ###   ########.fr       */
+/*   Updated: 2025/03/15 17:38:25 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,22 @@ typedef struct s_ambient
 	t_color	*color;
 }	t_ambient;
 
+typedef struct s_viewport
+{
+	double		height;
+	double		width;
+	t_coords	*start;
+	t_coords	*x_vector;
+	t_coords	*y_vector;
+}	t_viewport;
+
 typedef struct s_map
 {
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_objects	*objects;
 	t_light		*light;
+	t_viewport	*viewport;
 }	t_map;
 
 typedef struct s_mlx_data

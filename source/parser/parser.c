@@ -54,5 +54,6 @@ int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv)
 	init_mlx_data(mlx_data);
 	error_check = init_map(params, map);
 	free_params(params);
+	//calculate_viewport(map);
 	return (error_check);
 }

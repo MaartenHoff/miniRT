@@ -6,11 +6,11 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 19:57:28 by maahoff           #+#    #+#             */
-/*   Updated: 2025/02/20 16:50:38 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/03/15 17:52:45 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../../includes/miniRT.h"
 
 int	close_window(t_mlx_data *mlx_data)
 {
