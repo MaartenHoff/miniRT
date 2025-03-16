@@ -1,5 +1,24 @@
 #include "../../includes/miniRT.h"
 
+int	calculate_viewport(t_map **map)
+{
+	(*map)->viewport = malloc(sizeof(t_viewport));
+	if (!(*map)->viewport)
+		return (ERR_NOMEM);
+	(*map)->viewport->height = tan((*map)->camera->fov / 2) * 2;
+	if (WIDTH > HEIGHT)
+		(*map)->viewport->width = (*map)->viewport->height * (WIDTH / HEIGHT);
+	else
+	{
+		(*map)->viewport->width = (*map)->viewport->height;
+		(*map)->viewport->height = (*map)->viewport->width * (HEIGHT / WIDTH);
+	}
+	(*map)->viewport->start = NULL;
+	(*map)->viewport->x_vector = NULL;
+	(*map)->viewport->y_vector = NULL;
+	return (0);
+}
+
 int	open_file(int argc, char **argv, int *fd)
 {
 	if (argc != 2)
@@ -54,6 +73,6 @@ int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv)
 	init_mlx_data(mlx_data);
 	error_check = init_map(params, map);
 	free_params(params);
-	//calculate_viewport(map);
+	error_check = calculate_viewport(map);
 	return (error_check);
 }
