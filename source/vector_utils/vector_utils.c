@@ -18,29 +18,39 @@ t_coords *create_vector(t_coords start, t_coords end)
 	return (vector);
 }
 
-double get_vector_length(t_coords vector)
+t_coords vec_sub(t_coords vector1, t_coords vector2)
+{
+	t_coords	subtracted;
+
+	subtracted.x = vector1.x - vector2.x;
+	subtracted.y = vector1.y - vector2.y;
+	subtracted.z = vector1.z - vector2.z;
+	return (subtracted);
+}
+
+double vec_len(t_coords vector)
 {
 	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
 }
 
-t_coords normalize_vector(t_coords vector)
+t_coords vec_norm(t_coords vector)
 {
 	t_coords	normalized;
 	double		length;
 
-	length = get_vector_length(vector);
+	length = vec_len(vector);
 	normalized.x = vector.x / length;
 	normalized.y = vector.y / length;
 	normalized.z = vector.z / length;
 	return (normalized);
 }
 
-double get_dot_product(t_coords vector1, t_coords vector2)
+double vec_dot(t_coords vector1, t_coords vector2)
 {
 	return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z);
 }
 
-t_coords scale_vector(t_coords vector, double scalar)
+t_coords vec_mul(t_coords vector, double scalar)
 {
 	t_coords	scaled;
 
@@ -50,14 +60,13 @@ t_coords scale_vector(t_coords vector, double scalar)
 	return (scaled);
 }
 
-double get_point_distance(t_coords point1, t_coords point2)
+double point_dist(t_coords point1, t_coords point2)
 {
-	t_coords	*vector;
+	t_coords	vector;
 	double		distance;
 
-	vector = create_vector(point1, point2);
-	distance = get_vector_length(*vector);
-	free(vector);
+	vector = vec_sub(point1, point2);
+	distance = vec_len(vector);
 	return (distance);
 }
 
