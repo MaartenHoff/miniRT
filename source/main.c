@@ -1,16 +1,10 @@
 #include "../includes/miniRT.h"
 
-// funktion hier set_pixel:
-// pixel = y * mlx_data->line_length + x * 
-// (mlx_data->bits_per_pixel / 8);
-// mlx_data->addr[pixel] = color;
-
 void	set_pixel(int color, t_mlx_data *mlx_data, int x, int y)
 {
 	int	pixel;
 
-	pixel = y * mlx_data->line_length + x *
-		(mlx_data->bits_per_pixel / 8);
+	pixel = y * mlx_data->line_length + x * (mlx_data->bits_per_pixel / 8);
 	mlx_data->addr[pixel] = color;
 }
 
@@ -20,7 +14,7 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 	int			y;
 	int			color;
 	int			pixel;
-	t_coords	direction;
+	t_coords	*direction;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -28,8 +22,9 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 		x = 0;
 		while (x < WIDTH)
 		{
-			//direction = get_direction(x, y); - Vektor zwischen Kamera O (origin) und Punkt auf Leinwand abhaengig von x y.
-			//color = send_ray(map, direction); - alles ray schuss von O in D Richtung, bei hit zum licht usw.
+			direction = get_direction(map, x, y);
+			color = send_ray(map, *direction);
+			ft_memdel((void **)&direction);
 			set_pixel(color, mlx_data, x, y);
 			x++;
 		}

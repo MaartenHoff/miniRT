@@ -30,10 +30,14 @@
 
 
 // ray_handling
-int			send_ray(t_mlx_data *mlx_data, t_map *map);
-
-// init
-int			init_mlx_data(t_mlx_data **mlx_data);
+t_coords	*get_direction(t_map *map, int x, int y);
+int			send_ray(t_map *map, t_coords direction);
+int			sphere_hit(t_map *map, t_coords *origin, t_coords direction, 
+				t_hit *hit);
+int			cylinder_hit(t_map *map, t_coords *origin, t_coords direction, 
+				t_hit *hit);
+int			plane_hit(t_map *map, t_coords *origin, t_coords direction, 
+				t_hit *hit);
 
 // hooks
 int			close_window(t_mlx_data *mlx_data);
@@ -42,6 +46,7 @@ int			key_hook(int key_code, t_mlx_data *mlx_data);
 // parser
 int			parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv);
 int			init_map(char ***params, t_map **map);
+int			init_mlx_data(t_mlx_data **mlx_data);
 int			another_object(char **params, t_map **map);
 //		utils
 char		**tokenizer(char *line);
