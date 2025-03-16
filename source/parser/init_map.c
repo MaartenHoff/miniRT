@@ -107,6 +107,7 @@ int	init_map(char ***params, t_map **map)
 	(*map)->camera = NULL;
 	(*map)->objects = NULL;
 	(*map)->light = NULL;
+	(*map)->viewport = NULL;
 	error_check = init_groups(params, map);
 	return (error_check);
 }
