@@ -13,6 +13,7 @@ int	add_sphere(char **params, t_objects **objects)
 	if (!(*objects)->spheres->center)
 		return (ERR_NOMEM);
 	(*objects)->spheres->diameter = ft_atoi(params[2]);
+	(*objects)->spheres->radius = (*objects)->spheres->diameter / 2;
 	(*objects)->spheres->color = split_color(params[3]);
 	if (!(*objects)->spheres->color)
 		return (ERR_NOMEM);

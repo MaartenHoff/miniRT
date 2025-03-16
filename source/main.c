@@ -1,10 +1,5 @@
 #include "../includes/miniRT.h"
 
-// funktion hier set_pixel:
-// pixel = y * mlx_data->line_length + x * 
-// (mlx_data->bits_per_pixel / 8);
-// mlx_data->addr[pixel] = color;
-
 void	set_pixel(int color, t_mlx_data *mlx_data, int x, int y)
 {
 	int	pixel;

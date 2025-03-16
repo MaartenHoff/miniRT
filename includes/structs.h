@@ -19,6 +19,7 @@ typedef struct s_spheres
 {
 	t_coords	*center;
 	double		diameter;
+	double		radius;
 	t_color		*color;
 }	t_spheres;
 
