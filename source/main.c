@@ -45,6 +45,7 @@ int	main(int argc, char **argv)
 		return (handle_error(error_check, map));
 	// print_map(map);
 	fill_window(mlx_data, map);
+	printf("sphere intersection: %f\n", sphere_intersection(*(map->objects->spheres), *(map->camera->coords), *(map->camera->vector)));
 	free_map(map);
 	mlx_key_hook(mlx_data->win, key_hook, mlx_data);
 	mlx_hook(mlx_data->win, 17, 0, close_window, mlx_data);

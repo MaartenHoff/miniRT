@@ -70,4 +70,7 @@ t_coords	vec_norm(t_coords vector);
 double		vec_dot(t_coords vector1, t_coords vector2);
 t_coords	vec_mul(t_coords vector, double scalar);
 double		point_dist(t_coords point1, t_coords point2);
+
+// intersections
+double		sphere_intersection(t_spheres sphere, t_coords origin, t_coords d);
 #endif

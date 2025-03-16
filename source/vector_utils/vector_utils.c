@@ -28,6 +28,16 @@ t_coords vec_sub(t_coords point1, t_coords point2)
 	return (vector);
 }
 
+t_coords vec_add(t_coords point1, t_coords point2)
+{
+	t_coords	vector;
+
+	vector.x = point1.x + point2.x;
+	vector.y = point1.y + point2.y;
+	vector.z = point1.z + point2.z;
+	return (vector);
+}
+
 double vec_len(t_coords vector)
 {
 	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
