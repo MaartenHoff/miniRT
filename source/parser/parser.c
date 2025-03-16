@@ -13,9 +13,15 @@ int	calculate_viewport(t_map **map)
 		(*map)->viewport->width = (*map)->viewport->height;
 		(*map)->viewport->height = (*map)->viewport->width * (HEIGHT / WIDTH);
 	}
-	(*map)->viewport->start = NULL;
-	(*map)->viewport->x_vector = NULL;
-	(*map)->viewport->y_vector = NULL;
+	(*map)->viewport->start.x = 1;
+	(*map)->viewport->start.y = (*map)->viewport->height / 2;
+	(*map)->viewport->start.z = (*map)->viewport->height / 2;
+	(*map)->viewport->x_vector.z = (*map)->viewport->width / WIDTH;
+	(*map)->viewport->x_vector.y = 0;
+	(*map)->viewport->x_vector.x = 0;
+	(*map)->viewport->y_vector.z = 0;
+	(*map)->viewport->y_vector.y = - (*map)->viewport->height / HEIGHT;
+	(*map)->viewport->y_vector.x = 0;
 	return (0);
 }
 

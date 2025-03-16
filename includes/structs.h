@@ -69,19 +69,19 @@ typedef struct s_ambient
 }	t_ambient;
 
 typedef struct s_hit {
-	t_coords	*point;
-	t_coords	*normal;
+	t_coords	point;
+	t_coords	normal;
 	double		distance;
-	t_color		*color;
+	t_color		color;
 }	t_hit;
 
 typedef struct s_viewport
 {
 	double		height;
 	double		width;
-	t_coords	*start;
-	t_coords	*x_vector;
-	t_coords	*y_vector;
+	t_coords	start;
+	t_coords	x_vector;
+	t_coords	y_vector;
 }	t_viewport;
 
 typedef struct s_map

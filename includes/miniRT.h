@@ -30,7 +30,7 @@
 
 
 // ray_handling
-t_coords	*get_direction(t_map *map, int x, int y);
+t_coords	get_direction(t_map *map, int x, int y);
 int			send_ray(t_map *map, t_coords direction);
 int			sphere_hit(t_map *map, t_coords *origin, t_coords direction, 
 				t_hit *hit);
@@ -63,8 +63,9 @@ void		free_params(char ***params);
 // testing
 void		print_map(t_map *map);
 
+int 		color_to_int(t_color color);
 // vector_utils
-t_coords	vec_sub(t_coords point1, t_coords point2);
+t_coords	vec_create(t_coords point1, t_coords point2);
 double		vec_len(t_coords vector);
 t_coords	vec_norm(t_coords vector);
 double		vec_dot(t_coords vector1, t_coords vector2);
