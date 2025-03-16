@@ -13,7 +13,6 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 	int			x;
 	int			y;
 	int			color;
-	int			pixel;
 	t_coords	*direction;
 
 	y = 0;

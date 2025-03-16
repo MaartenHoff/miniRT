@@ -3,6 +3,9 @@
 t_coords	*get_direction(t_map *map, int x, int y)
 {
 	t_coords	*direction;
+	(void)map;
+	(void)x;
+	(void)y;
 
 	direction = malloc(sizeof(t_coords));
 	if (!direction)
