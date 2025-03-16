@@ -18,14 +18,14 @@ t_coords *create_vector(t_coords start, t_coords end)
 	return (vector);
 }
 
-t_coords vec_sub(t_coords vector1, t_coords vector2)
+t_coords vec_sub(t_coords point1, t_coords point2)
 {
-	t_coords	subtracted;
+	t_coords	vector;
 
-	subtracted.x = vector1.x - vector2.x;
-	subtracted.y = vector1.y - vector2.y;
-	subtracted.z = vector1.z - vector2.z;
-	return (subtracted);
+	vector.x = point1.x - point2.x;
+	vector.y = point1.y - point2.y;
+	vector.z = point1.z - point2.z;
+	return (vector);
 }
 
 double vec_len(t_coords vector)
