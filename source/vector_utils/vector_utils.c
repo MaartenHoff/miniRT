@@ -5,13 +5,16 @@
 
 #include "../../includes/miniRT.h"
 
-t_coords create_vector(t_coords start, t_coords end)
+t_coords *create_vector(t_coords start, t_coords end)
 {
-	t_coords	vector;
+	t_coords	*vector;
 
-	vector.x = end.x - start.x;
-	vector.y = end.y - start.y;
-	vector.z = end.z - start.z;
+	vector = malloc(sizeof(t_coords));
+	if (!vector)
+		return (NULL);
+	vector->x = end.x - start.x;
+	vector->y = end.y - start.y;
+	vector->z = end.z - start.z;
 	return (vector);
 }
 
@@ -49,10 +52,13 @@ t_coords scale_vector(t_coords vector, double scalar)
 
 double get_point_distance(t_coords point1, t_coords point2)
 {
-	t_coords	vector;
+	t_coords	*vector;
+	double		distance;
 
 	vector = create_vector(point1, point2);
-	return (get_vector_length(vector));
+	distance = get_vector_length(*vector);
+	free(vector);
+	return (distance);
 }
 
 
