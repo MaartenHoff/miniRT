@@ -13,7 +13,7 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 	int			x;
 	int			y;
 	int			color;
-	t_coords	*direction;
+	t_coords	direction;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -22,7 +22,7 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 		while (x < WIDTH)
 		{
 			direction = get_direction(map, x, y);
-			color = send_ray(map, *direction);
+			color = send_ray(map, direction);
 			ft_memdel((void **)&direction);
 			set_pixel(color, mlx_data, x, y);
 			x++;

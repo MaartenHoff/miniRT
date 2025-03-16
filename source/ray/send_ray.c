@@ -5,9 +5,8 @@ int			ambient_light(t_map *map);
 // send another ray in direction of light check for
 // t_color		calculate_lighting(t_map *map, t_hit *hit); 
 // // t_color into int color
-int			color_to_int(t_color *final);
 
-int			ambient_light(t_map *map)
+int	ambient_light(t_map *map)
 {
 	(void)map;
 	return (0x0000FF);
@@ -45,9 +44,8 @@ int	send_ray(t_map *map, t_coords direction)
 	hit = NULL;
 	final = NULL;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, hit))
-	{
 		return (ambient_light(map));
-	}
 	//final = calculate_lighting(map, hit);
-	return (color_to_int(final));
+	// return (color_to_int(final));
+	return (color_to_int(hit->color));
 }

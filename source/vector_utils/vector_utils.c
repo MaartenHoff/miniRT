@@ -5,20 +5,7 @@
 
 #include "../../includes/miniRT.h"
 
-t_coords *create_vector(t_coords start, t_coords end)
-{
-	t_coords	*vector;
-
-	vector = malloc(sizeof(t_coords));
-	if (!vector)
-		return (NULL);
-	vector->x = end.x - start.x;
-	vector->y = end.y - start.y;
-	vector->z = end.z - start.z;
-	return (vector);
-}
-
-t_coords vec_sub(t_coords point1, t_coords point2)
+t_coords vec_create(t_coords point1, t_coords point2)
 {
 	t_coords	vector;
 
@@ -55,12 +42,13 @@ t_coords vec_norm(t_coords vector)
 	return (normalized);
 }
 
-double vec_skalar(t_coords vector1, t_coords vector2)
+double	vec_skalar(t_coords vector1, t_coords vector2)
 {
-	return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z);
+	return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z 
+		* vector2.z);
 }
 
-t_coords vec_mul(t_coords vector, double scalar)
+t_coords	vec_mul(t_coords vector, double scalar)
 {
 	t_coords	scaled;
 
@@ -75,7 +63,7 @@ double point_distance(t_coords point1, t_coords point2)
 	t_coords	vector;
 	double		distance;
 
-	vector = vec_sub(point1, point2);
+	vector = vec_create(point1, point2);
 	distance = vec_len(vector);
 	return (distance);
 }
