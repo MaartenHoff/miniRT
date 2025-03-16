@@ -23,7 +23,6 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 		{
 			direction = get_direction(map, x, y);
 			color = send_ray(map, direction);
-			ft_memdel((void **)&direction);
 			set_pixel(color, mlx_data, x, y);
 			x++;
 		}
@@ -40,12 +39,15 @@ int	main(int argc, char **argv)
 
 	mlx_data = NULL;
 	map = NULL;
+	write(1, "hello\n", 6);
+	printf("hello\n");
 	error_check = parser(&mlx_data, &map, argc, argv);
 	if (error_check)
 		return (handle_error(error_check, map));
 	// print_map(map);
-	fill_window(mlx_data, map);
 	printf("sphere intersection: %f\n", sphere_intersection(*(map->objects->spheres), *(map->camera->coords), *(map->camera->vector)));
+
+	fill_window(mlx_data, map);
 	free_map(map);
 	mlx_key_hook(mlx_data->win, key_hook, mlx_data);
 	mlx_hook(mlx_data->win, 17, 0, close_window, mlx_data);

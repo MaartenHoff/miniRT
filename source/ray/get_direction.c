@@ -7,13 +7,12 @@ t_coords	get_direction(t_map *map, int x, int y)
 	t_coords	direction;
 	t_coords	point_on_viewport;
 
-	(void)map;
-	(void)x;
-	(void)y;
-
 	point_on_viewport = vec_add(map->viewport->start, 
 			vec_add(vec_mul(map->viewport->x_vector, x), 
 				vec_mul(map->viewport->y_vector, y)));
-	direction = vec_create(*(map->camera->coords), point_on_viewport);
+	// print_vektor(point_on_viewport);
+	direction = vec_create(point_on_viewport, *(map->camera->coords));
+	// printf("direction: ");
+	// print_vektor(direction);
 	return (direction);
 }

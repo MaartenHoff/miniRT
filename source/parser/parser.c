@@ -13,10 +13,15 @@ int	calculate_viewport(t_map **map)
 		(*map)->viewport->width = (*map)->viewport->height;
 		(*map)->viewport->height = (*map)->viewport->width * (HEIGHT / WIDTH);
 	}
+	if ((*map)->viewport->height < 0)
+		(*map)->viewport->height *= -1;
+	if ((*map)->viewport->width < 0)
+		(*map)->viewport->width *= -1;
 	(*map)->viewport->start.x = 1;
 	(*map)->viewport->start.y = (*map)->viewport->height / 2;
-	(*map)->viewport->start.z = (*map)->viewport->height / 2;
+	(*map)->viewport->start.z = - (*map)->viewport->width / 2;
 	(*map)->viewport->x_vector.z = (*map)->viewport->width / WIDTH;
+	printf("blabla : %lf\n", (*map)->viewport->x_vector.z);
 	(*map)->viewport->x_vector.y = 0;
 	(*map)->viewport->x_vector.x = 0;
 	(*map)->viewport->y_vector.z = 0;

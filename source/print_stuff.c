@@ -124,3 +124,8 @@ void	print_map(t_map *map)
 	}
 	printf("\n");
 }
+
+void	print_vektor(t_coords vector)
+{
+	printf("x: %lf, y: %lf, z: %lf\n", vector.x, vector.y, vector.z);
+}

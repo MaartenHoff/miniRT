@@ -65,6 +65,8 @@ double point_distance(t_coords point1, t_coords point2)
 
 	vector = vec_create(point1, point2);
 	distance = vec_len(vector);
+	if (distance < 0)
+		distance *= -1;
 	return (distance);
 }
 

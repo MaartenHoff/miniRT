@@ -22,8 +22,9 @@ int	send_ray_to_objects(t_map *map, t_coords *origin, t_coords direction,
 	new_hit = NULL;
 	while (current)
 	{
+		new_hit = malloc(sizeof(t_hit));
 		if (current->type == SPHERE)
-			sphere_hit(map, origin, direction, new_hit);
+			sphere_hit(current->spheres, origin, direction, new_hit);
 		else if (current->type == CYLINDER)
 			cylinder_hit(map, origin, direction, new_hit);
 		else if (current->type == PLANE)
