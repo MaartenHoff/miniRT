@@ -34,8 +34,8 @@ double	sphere_intersection(t_spheres sphere, t_coords origin, t_coords d)
 	double		c;
 
 	oc = vec_sub(origin, *sphere.center);
-	a = vec_dot(d, d);
-	b = 2 * vec_dot(oc, d);
-	c = vec_dot(oc, oc) - sphere.radius * sphere.radius;
+	a = vec_skalar(d, d);
+	b = 2 * vec_skalar(oc, d);
+	c = vec_skalar(oc, oc) - sphere.radius * sphere.radius;
 	return (solve_quadratic(a, b, c));
 }
