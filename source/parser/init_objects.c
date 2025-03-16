@@ -12,7 +12,7 @@ int	add_sphere(char **params, t_objects **objects)
 	(*objects)->spheres->center = split_coords(params[1]);
 	if (!(*objects)->spheres->center)
 		return (ERR_NOMEM);
-	(*objects)->spheres->diameter = ft_atoi(params[2]);
+	(*objects)->spheres->diameter = ft_atof(params[2]);
 	(*objects)->spheres->radius = (*objects)->spheres->diameter / 2;
 	(*objects)->spheres->color = split_color(params[3]);
 	if (!(*objects)->spheres->color)
@@ -56,8 +56,8 @@ int	add_cylinder(char **params, t_objects **objects)
 	(*objects)->cylinder->vector = split_coords(params[2]);
 	if (!(*objects)->cylinder->vector)
 		return (ERR_NOMEM);
-	(*objects)->cylinder->diameter = ft_atoi(params[3]);
-	(*objects)->cylinder->height = ft_atoi(params[4]);
+	(*objects)->cylinder->diameter = ft_atof(params[3]);
+	(*objects)->cylinder->height = ft_atof(params[4]);
 	(*objects)->cylinder->color = split_color(params[5]);
 	if (!(*objects)->cylinder->color)
 		return (ERR_NOMEM);

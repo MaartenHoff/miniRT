@@ -32,9 +32,9 @@ t_coords	*split_coords(char *str)
 		free(coords);
 		return (NULL);
 	}
-	coords->x = ft_atoi(split[0]);
-	coords->y = ft_atoi(split[1]);
-	coords->z = ft_atoi(split[2]);
+	coords->x = ft_atof(split[0]);
+	coords->y = ft_atof(split[1]);
+	coords->z = ft_atof(split[2]);
 	ft_free_array(split);
 	return (coords);
 }
