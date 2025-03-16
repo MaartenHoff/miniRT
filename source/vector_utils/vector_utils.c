@@ -55,7 +55,7 @@ t_coords vec_norm(t_coords vector)
 	return (normalized);
 }
 
-double vec_dot(t_coords vector1, t_coords vector2)
+double vec_skalar(t_coords vector1, t_coords vector2)
 {
 	return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z);
 }
@@ -70,7 +70,7 @@ t_coords vec_mul(t_coords vector, double scalar)
 	return (scaled);
 }
 
-double point_dist(t_coords point1, t_coords point2)
+double point_distance(t_coords point1, t_coords point2)
 {
 	t_coords	vector;
 	double		distance;
