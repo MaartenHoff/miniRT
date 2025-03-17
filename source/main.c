@@ -5,8 +5,9 @@ void	set_pixel(int color, t_mlx_data *mlx_data, int x, int y)
 	int	pixel;
 
 	pixel = y * mlx_data->line_length + x * (mlx_data->bits_per_pixel / 8);
-	mlx_data->addr[pixel] = color;
+	*(int *)(mlx_data->addr + pixel) = color;
 }
+
 
 void	fill_window(t_mlx_data *mlx_data, t_map *map)
 {

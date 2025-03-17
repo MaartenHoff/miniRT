@@ -2,8 +2,15 @@
 
 int	ambient_light(t_map *map)
 {
-	(void)map;
-	return (0x0000FF);
+	t_color	color;
+
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+	color.r += 255 * map->ambient->brightness;
+	color.g += 255 * map->ambient->brightness;
+	color.b += 255 * map->ambient->brightness;
+	return (color_to_int(color));
 }
 
 int	send_ray_to_objects(t_map *map, t_coords *origin, t_coords direction, 
@@ -46,6 +53,7 @@ int	send_ray(t_map *map, t_coords direction)
 		return (ft_memdel((void **)&hit), ambient_light(map));
 	color = color_to_int(hit->color);
 	ft_memdel((void **)&hit);
+	printf("color: %d\n", color);
 	return (color);
 }
 
