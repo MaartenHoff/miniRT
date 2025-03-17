@@ -7,7 +7,7 @@ LIBFT	= includes/libft/libft.a
 LIBX	= includes/42mlx/libmlx.a
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -Iincludes
+CFLAGS	= -Wall -Wextra -Werror -Iincludes -O3
 LDFLAGS	= -Lincludes/libft -lft -Lincludes/42mlx -lmlx -lm -lX11 -lXext
 
 all: $(NAME)

@@ -13,18 +13,7 @@ int	init_camera(char **params, t_map **map)
 	if (!camera)
 		return (ERR_NOMEM);
 	camera->coords = split_coords(params[1]);
-	if (!camera->coords)
-	{
-		free(camera);
-		return (ERR_NOMEM);
-	}
 	camera->vector = split_coords(params[2]);
-	if (!camera->vector)
-	{
-		free(camera->coords);
-		free(camera);
-		return (ERR_NOMEM);
-	}
 	camera->fov = ft_atoi(params[3]);
 	(*map)->camera = camera;
 	return (error_check);
@@ -40,12 +29,8 @@ int	init_light(char **params, t_map **map)
 	if (!light)
 		return (ERR_NOMEM);
 	light->source = split_coords(params[1]);
-	if (params[1] && !light->source)
-		return (ERR_NOMEM);
 	light->brightness = ft_atof(params[2]);
 	light->color = split_color(params[3]);
-	if (params[3] && !light->color)
-		return (ERR_NOMEM);
 	(*map)->light = light;
 	return (error_check);
 }
@@ -61,11 +46,6 @@ int	init_ambient(char **params, t_map **map)
 		return (ERR_NOMEM);
 	ambient->brightness = ft_atof(params[1]);
 	ambient->color = split_color(params[2]);
-	if (!ambient->color)
-	{
-		free(ambient);
-		return (ERR_NOMEM);
-	}
 	(*map)->ambient = ambient;
 	return (error_check);
 }

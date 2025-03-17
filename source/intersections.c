@@ -26,7 +26,7 @@ double	solve_quadratic(double a, double b, double c)
 	return (-1);
 }
 
-double	sphere_intersection(t_spheres sphere, t_coords origin, t_coords d)
+double	sphere_intersection(t_spheres *sphere, t_coords origin, t_coords d)
 {
 	t_coords	co;
 	double		a;
@@ -34,9 +34,9 @@ double	sphere_intersection(t_spheres sphere, t_coords origin, t_coords d)
 	double		c;
 
 	// print_vektor(d);
-	co = vec_create(*sphere.center, origin);
+	co = vec_create(sphere->center, origin);
 	a = vec_skalar(d, d);
 	b = 2 * vec_skalar(co, d);
-	c = vec_skalar(co, co) - sphere.radius * sphere.radius;
+	c = vec_skalar(co, co) - sphere->radius * sphere->radius;
 	return (solve_quadratic(a, b, c));
 }

@@ -1,6 +1,6 @@
 #include "../../includes/miniRT.h"
 
-int	plane_hit(t_map *map, t_coords *origin, t_coords direction, t_hit *hit)
+int	plane_hit(t_map *map, t_coords origin, t_coords direction, t_hit *hit)
 {
 	(void)map;
 	(void)origin;

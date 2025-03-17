@@ -13,7 +13,7 @@ int	ambient_light(t_map *map)
 	return (color_to_int(color));
 }
 
-int	send_ray_to_objects(t_map *map, t_coords *origin, t_coords direction, 
+int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction, 
 		t_hit *closest_hit)
 {
 	t_objects	*current;
@@ -42,18 +42,14 @@ int	send_ray_to_objects(t_map *map, t_coords *origin, t_coords direction,
 
 int	send_ray(t_map *map, t_coords direction)
 {
-	t_hit	*hit;
+	t_hit	hit;
 	int		color;
 
-	hit = malloc(sizeof(t_hit));
-	if (!hit)
-		return (0);
-	hit->distance = -1;
-	if (!send_ray_to_objects(map, map->camera->coords, direction, hit))
-		return (ft_memdel((void **)&hit), ambient_light(map));
-	color = color_to_int(hit->color);
-	ft_memdel((void **)&hit);
-	printf("color: %d\n", color);
+	hit.distance = -1;
+	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
+		return (ambient_light(map));
+	color = color_to_int(hit.color);
+	//printf("color: %d\n", color);
 	return (color);
 }
 

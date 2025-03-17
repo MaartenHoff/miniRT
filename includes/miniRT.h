@@ -32,11 +32,11 @@
 // ray_handling
 t_coords	get_direction(t_map *map, int x, int y);
 int			send_ray(t_map *map, t_coords direction);
-int			sphere_hit(t_spheres *sphere, t_coords *origin, t_coords direction, 
+int			sphere_hit(t_spheres *sphere, t_coords origin, t_coords direction, 
 				t_hit *hit);
-int			cylinder_hit(t_map *map, t_coords *origin, t_coords direction, 
+int			cylinder_hit(t_map *map, t_coords origin, t_coords direction, 
 				t_hit *hit);
-int			plane_hit(t_map *map, t_coords *origin, t_coords direction, 
+int			plane_hit(t_map *map, t_coords origin, t_coords direction, 
 				t_hit *hit);
 
 // hooks
@@ -50,8 +50,8 @@ int			init_mlx_data(t_mlx_data **mlx_data);
 int			another_object(char **params, t_map **map);
 //		utils
 char		**tokenizer(char *line);
-t_coords	*split_coords(char *str);
-t_color		*split_color(char *str);
+t_coords	split_coords(char *str);
+t_color		split_color(char *str);
 
 // error
 int			handle_error(int error_code, t_map *map);
@@ -75,5 +75,5 @@ double 		point_distance(t_coords point1, t_coords point2);
 t_coords 	vec_add(t_coords point1, t_coords point2);
 
 // intersections
-double		sphere_intersection(t_spheres sphere, t_coords origin, t_coords d);
+double		sphere_intersection(t_spheres *sphere, t_coords origin, t_coords d);
 #endif
