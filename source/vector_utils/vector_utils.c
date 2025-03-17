@@ -9,9 +9,9 @@ t_coords vec_create(t_coords point1, t_coords point2)
 {
 	t_coords	vector;
 
-	vector.x = point1.x - point2.x;
-	vector.y = point1.y - point2.y;
-	vector.z = point1.z - point2.z;
+	vector.x = point2.x - point1.x;
+	vector.y = point2.y - point1.y;
+	vector.z = point2.z - point1.z;
 	return (vector);
 }
 

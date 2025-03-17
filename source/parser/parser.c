@@ -21,7 +21,6 @@ int	calculate_viewport(t_map **map)
 	(*map)->viewport->start.y = (*map)->viewport->height / 2;
 	(*map)->viewport->start.z = - (*map)->viewport->width / 2;
 	(*map)->viewport->x_vector.z = (*map)->viewport->width / WIDTH;
-	printf("blabla : %lf\n", (*map)->viewport->x_vector.z);
 	(*map)->viewport->x_vector.y = 0;
 	(*map)->viewport->x_vector.x = 0;
 	(*map)->viewport->y_vector.z = 0;

@@ -28,14 +28,15 @@ double	solve_quadratic(double a, double b, double c)
 
 double	sphere_intersection(t_spheres sphere, t_coords origin, t_coords d)
 {
-	t_coords	oc;
+	t_coords	co;
 	double		a;
 	double		b;
 	double		c;
 
-	oc = vec_create(*sphere.center, origin);
+	// print_vektor(d);
+	co = vec_create(*sphere.center, origin);
 	a = vec_skalar(d, d);
-	b = 2 * vec_skalar(oc, d);
-	c = vec_skalar(oc, oc) - sphere.radius * sphere.radius;
+	b = 2 * vec_skalar(co, d);
+	c = vec_skalar(co, co) - sphere.radius * sphere.radius;
 	return (solve_quadratic(a, b, c));
 }

@@ -1,7 +1,5 @@
 #include "../../includes/miniRT.h"
 
-t_coords	vec_add(t_coords vector, t_coords vector2);
-
 t_coords	get_direction(t_map *map, int x, int y)
 {
 	t_coords	direction;
@@ -11,7 +9,7 @@ t_coords	get_direction(t_map *map, int x, int y)
 			vec_add(vec_mul(map->viewport->x_vector, x), 
 				vec_mul(map->viewport->y_vector, y)));
 	// print_vektor(point_on_viewport);
-	direction = vec_create(point_on_viewport, *(map->camera->coords));
+	direction = vec_norm(vec_create(*(map->camera->coords), point_on_viewport));
 	// printf("direction: ");
 	// print_vektor(direction);
 	return (direction);

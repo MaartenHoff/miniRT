@@ -78,6 +78,7 @@ void	free_map(t_map *map)
 		ft_memdel((void **)&(map->objects));
 		map->objects = temp;
 	}
+	free(map->viewport);
 	free(map->ambient->color);
 	free(map->ambient);
 	free(map->camera->coords);
