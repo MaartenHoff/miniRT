@@ -1,10 +1,10 @@
 #include "../../includes/miniRT.h"
 
-int	ambient_light(t_map *map, t_color color)
+int	color_plus_light(t_color light_color, double brightness, t_color color)
 {
-	color.r *= (map->ambient->color.r * map->ambient->brightness) / 255;
-	color.g *= (map->ambient->color.g * map->ambient->brightness) / 255;
-	color.b *= (map->ambient->color.b * map->ambient->brightness) / 255;
+	color.r *= (light_color.r * brightness) / 255;
+	color.g *= (light_color.g * brightness) / 255;
+	color.b *= (light_color.b * brightness) / 255;
 	return (color_to_int(color));
 }
 
@@ -42,12 +42,10 @@ int	send_ray(t_map *map, t_coords direction)
 
 	hit.distance = -1;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
-		return (ambient_light(map, (t_color){0, 0, 0}));
-	color = ambient_light(map, hit.color);
+		return (color_plus_light(map->ambient->color, map->ambient->brightness, 
+				(t_color){0, 0, 0}));
+	color = color_plus_light(map->ambient->color, map->ambient->brightness, 
+			hit.color);
 	//printf("color: %d\n", color);
 	return (color);
 }
-
-
-	//final = calculate_lighting(map, hit);
-	// return (color_to_int(final));
