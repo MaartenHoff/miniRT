@@ -6,17 +6,11 @@ int	sphere_hit(t_spheres *sphere, t_coords origin, t_coords direction,
 	double	t;
 
 	t = sphere_intersection(sphere, origin, direction);
-	//printf("t: %lf\n", t);
-	// print_vektor(direction);
 	if (t < 0)
 		return (0);
 	hit->point = vec_add(origin, vec_mul(direction, t));
 	hit->distance = t;
 	hit->color = sphere->color;
-	// if (t >40)
-	// 	hit->color.b += (t * t * 0.23);
-	// if (t < 40)
-	// 	hit->color.g += (t * t);
 	hit->normal = vec_norm(vec_create(sphere->center, hit->point));
 	return (0);
 }

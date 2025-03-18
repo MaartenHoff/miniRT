@@ -13,9 +13,9 @@ int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction,
 		if (current->type == SPHERE)
 			sphere_hit(current->spheres, origin, direction, &new_hit);
 		else if (current->type == CYLINDER)
-			cylinder_hit(map, origin, direction, &new_hit);
+			cylinder_hit(current->cylinder, origin, direction, &new_hit);
 		else if (current->type == PLANE)
-			plane_hit(map, origin, direction, &new_hit);
+			plane_hit(current->plane, origin, direction, &new_hit);
 		if (new_hit.distance >= 0.0)
 		{
 			if (closest_hit->distance < 0.0 || 
@@ -27,7 +27,7 @@ int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction,
 	return (closest_hit->distance >= 0.0);
 }
 
-double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
+double	calc_light(t_map *map, t_hit hit)
 {
 	t_coords	direction;
 	t_coords	safe_distance;
@@ -35,7 +35,6 @@ double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
 	double		brightness;
 	double		skalar;
 
-	(void)old_ray;
 	place_holder.distance = -1;
 	safe_distance = vec_add(hit.point, vec_mul(hit.normal, 1e-4));
 	direction = vec_create(hit.point, map->light->source);
@@ -53,6 +52,7 @@ int	send_ray(t_map *map, t_coords direction)
 	t_light_data	final_light;
 	t_color			color;
 
+	//print_vektor(direction);
 	hit.distance = -1;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
 		return (0);

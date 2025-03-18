@@ -26,7 +26,7 @@ int	add_plane(char **params, t_objects **objects)
 	if (!(*objects)->plane)
 		return (ERR_NOMEM);
 	(*objects)->plane->point = split_coords(params[1]);
-	(*objects)->plane->vector = split_coords(params[2]);
+	(*objects)->plane->vector = vec_norm(split_coords(params[2]));
 	(*objects)->plane->color = split_color(params[3]);
 	return (0);
 }
