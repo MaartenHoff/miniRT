@@ -70,3 +70,13 @@ double point_distance(t_coords point1, t_coords point2)
 		distance *= -1;
 	return (distance);
 }
+
+t_coords	vec_sub(t_coords point1, t_coords point2)
+{
+	t_coords	vector;
+
+	vector.x = point1.x - point2.x;
+	vector.y = point1.y - point2.y;
+	vector.z = point1.z - point2.z;
+	return (vector);
+}

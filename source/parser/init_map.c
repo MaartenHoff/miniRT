@@ -13,7 +13,7 @@ int	init_camera(char **params, t_map **map)
 	if (!camera)
 		return (ERR_NOMEM);
 	camera->coords = split_coords(params[1]);
-	camera->vector = split_coords(params[2]);
+	camera->vector = vec_norm(split_coords(params[2]));
 	camera->fov = ft_atoi(params[3]);
 	(*map)->camera = camera;
 	return (error_check);

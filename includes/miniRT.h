@@ -36,10 +36,7 @@ int				sphere_hit(t_spheres *sphere, t_coords origin, t_coords
 					direction, t_hit *hit);
 double			sphere_intersection(t_spheres *sphere, t_coords origin, 
 					t_coords d);
-int				cylinder_hit(t_map *map, t_coords origin, t_coords direction, 
-					t_hit *hit);
-int				plane_hit(t_map *map, t_coords origin, t_coords direction, 
-					t_hit *hit);
+int				plane_hit(t_planes *plane, t_coords origin, t_coords direction, t_hit *hit);
 
 // hooks
 int				close_window(t_mlx_data *mlx_data);
@@ -72,6 +69,7 @@ t_light_data	light_plus_light(t_color light1, double brightness1,
 t_coords		vec_create(t_coords point1, t_coords point2);
 double			vec_len(t_coords vector);
 t_coords		vec_norm(t_coords vector);
+t_coords		vec_sub(t_coords point1, t_coords point2);
 double			vec_skalar(t_coords vector1, t_coords vector2);
 t_coords		vec_mul(t_coords vector, double scalar);
 double			point_distance(t_coords point1, t_coords point2);
@@ -80,4 +78,9 @@ t_coords		vec_add(t_coords point1, t_coords point2);
 // testing
 void			print_map(t_map *map);
 void			print_vektor(t_coords vector);
+
+//intersections
+double			plane_intersection(t_planes *plane, t_coords origin, t_coords direction);
+
+//hits
 #endif
