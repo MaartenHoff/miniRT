@@ -76,10 +76,8 @@ int	init_groups(char ***params, t_map **map)
 
 int	init_map(char ***params, t_map **map)
 {
-	int	groups;
 	int	error_check;
 
-	groups = 0;
 	*map = malloc(sizeof(t_map));
 	if (!map)
 		return (ERR_NOMEM);
