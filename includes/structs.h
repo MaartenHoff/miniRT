@@ -15,6 +15,11 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_light_data
+{
+	t_color	color;
+	double	brightness;
+}	t_light_data;
 typedef struct s_spheres
 {
 	t_coords	center;
