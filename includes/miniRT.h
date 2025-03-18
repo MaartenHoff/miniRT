@@ -36,7 +36,10 @@ int				sphere_hit(t_spheres *sphere, t_coords origin, t_coords
 					direction, t_hit *hit);
 double			sphere_intersection(t_spheres *sphere, t_coords origin, 
 					t_coords d);
-int				plane_hit(t_planes *plane, t_coords origin, t_coords direction, t_hit *hit);
+int				plane_hit(t_planes *plane, t_coords origin, t_coords direction, 
+					t_hit *hit);
+int				cylinder_hit(t_cylinder *cylinder_hit, t_coords origin, 
+					t_coords direction, t_hit *hit);
 
 // hooks
 int				close_window(t_mlx_data *mlx_data);
@@ -84,4 +87,5 @@ void			print_vektor(t_coords vector);
 double			plane_intersection(t_planes *plane, t_coords origin, t_coords direction);
 
 //hits
+
 #endif

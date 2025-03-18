@@ -39,7 +39,7 @@ void	print_map(t_map *map)
 			map->camera->vector.x,
 			map->camera->vector.y,
 			map->camera->vector.z);
-		printf("\tfov: [%d]\n", map->camera->fov);
+		printf("\tfov: [%lf]\n", map->camera->fov);
 	}
 	if (map->light)
 	{
