@@ -6,11 +6,12 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:06:03 by adiler            #+#    #+#             */
-/*   Updated: 2025/03/12 14:30:27 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/03/18 12:23:43 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stdio.h>
 
 static void	process_whitespace_sign(char **ptr, int *sign)
 {

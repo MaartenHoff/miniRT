@@ -5,7 +5,7 @@
 
 #include "../../includes/miniRT.h"
 
-t_coords vec_create(t_coords point1, t_coords point2)
+t_coords	vec_create(t_coords point1, t_coords point2)
 {
 	t_coords	vector;
 
@@ -15,7 +15,7 @@ t_coords vec_create(t_coords point1, t_coords point2)
 	return (vector);
 }
 
-t_coords vec_add(t_coords point1, t_coords point2)
+t_coords	vec_add(t_coords point1, t_coords point2)
 {
 	t_coords	vector;
 
@@ -25,12 +25,13 @@ t_coords vec_add(t_coords point1, t_coords point2)
 	return (vector);
 }
 
-double vec_len(t_coords vector)
+double	vec_len(t_coords vector)
 {
-	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
+	return (sqrt(vector.x * vector.x + vector.y * 
+			vector.y + vector.z * vector.z));
 }
 
-t_coords vec_norm(t_coords vector)
+t_coords	vec_norm(t_coords vector)
 {
 	t_coords	normalized;
 	double		length;

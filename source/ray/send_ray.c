@@ -2,9 +2,9 @@
 
 int	ambient_light(t_map *map, t_color color)
 {
-	color.r *= (map->ambient->color.r * map->ambient->brightness)/255;
-	color.g *= (map->ambient->color.g * map->ambient->brightness)/255;
-	color.b *= (map->ambient->color.b * map->ambient->brightness)/255;
+	color.r *= (map->ambient->color.r * map->ambient->brightness) / 255;
+	color.g *= (map->ambient->color.g * map->ambient->brightness) / 255;
+	color.b *= (map->ambient->color.b * map->ambient->brightness) / 255;
 	return (color_to_int(color));
 }
 
