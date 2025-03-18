@@ -76,6 +76,7 @@ double			vec_skalar(t_coords vector1, t_coords vector2);
 t_coords		vec_mul(t_coords vector, double scalar);
 double			point_distance(t_coords point1, t_coords point2);
 t_coords		vec_add(t_coords point1, t_coords point2);
+t_coords		vec_cross(t_coords vector1, t_coords vector2);
 
 // testing
 void			print_map(t_map *map);

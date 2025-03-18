@@ -65,7 +65,7 @@ typedef struct s_camera
 {
 	t_coords	coords;
 	t_coords	vector;
-	int			fov;
+	double		fov;
 }	t_camera;
 
 typedef struct s_ambient

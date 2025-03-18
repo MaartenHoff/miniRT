@@ -2,10 +2,14 @@
 
 int	calculate_viewport(t_map **map)
 {
+	t_coords	vec_right;
+	t_coords	vec_up;
+	t_coords	center;
+
 	(*map)->viewport = malloc(sizeof(t_viewport));
 	if (!(*map)->viewport)
 		return (ERR_NOMEM);
-	(*map)->viewport->height = tan((*map)->camera->fov / 2) * 2;
+	(*map)->viewport->height = fabs(tan((*map)->camera->fov / 2) * 2);
 	if (WIDTH > HEIGHT)
 		(*map)->viewport->width = (*map)->viewport->height * (WIDTH / HEIGHT);
 	else
@@ -13,19 +17,15 @@ int	calculate_viewport(t_map **map)
 		(*map)->viewport->width = (*map)->viewport->height;
 		(*map)->viewport->height = (*map)->viewport->width * (HEIGHT / WIDTH);
 	}
-	if ((*map)->viewport->height < 0)
-		(*map)->viewport->height *= -1;
-	if ((*map)->viewport->width < 0)
-		(*map)->viewport->width *= -1;
-	(*map)->viewport->start.x = 1;
-	(*map)->viewport->start.y = (*map)->viewport->height / 2;
-	(*map)->viewport->start.z = - (*map)->viewport->width / 2;
-	(*map)->viewport->x_vector.z = (*map)->viewport->width / WIDTH;
-	(*map)->viewport->x_vector.y = 0;
-	(*map)->viewport->x_vector.x = 0;
-	(*map)->viewport->y_vector.z = 0;
-	(*map)->viewport->y_vector.y = - (*map)->viewport->height / HEIGHT;
-	(*map)->viewport->y_vector.x = 0;
+	vec_right = vec_mul(vec_norm(vec_cross((*map)->camera->vector, (t_coords){0, 1, 0})), (*map)->viewport->width / 2);
+	vec_up = vec_mul(vec_norm(vec_cross(vec_right, (*map)->camera->vector)), (*map)->viewport->height / 2);
+	center = vec_add((*map)->camera->coords, (*map)->camera->vector);
+	(*map)->viewport->start = vec_add(center, 
+			vec_add(vec_mul(vec_right, -1), vec_up));
+	(*map)->viewport->x_vector = vec_mul(vec_right, 
+			(*map)->viewport->width / WIDTH);
+	(*map)->viewport->y_vector = vec_mul(vec_up, -1 * 
+			(*map)->viewport->height / HEIGHT);
 	return (0);
 }
 

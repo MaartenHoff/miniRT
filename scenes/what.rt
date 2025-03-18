@@ -1,0 +1,6 @@
+#A 	[ambient_ratio]: 0.0-1.0	[R,G,B]: 0 to 255
+#C 	[x,y,z] position			[orientation] 0,0,1: 	[FOV]: Field of view 0-180 degrees
+#L 	[x,y,z] position			[brightness] 0.0-1.0	([R,G,B] not in neccesary in mando)
+#sp	[x,y,z] 					[diameter] 				[R,G,B]
+#pl [x,y,z] 					[normal_vector]			[R,G,B]
+#cy [x,y,z]		[axis]			[diameter]		[height]	[R,G,B]

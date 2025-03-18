@@ -56,8 +56,8 @@ int	send_ray(t_map *map, t_coords direction)
 	hit.distance = -1;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
 		return (0);
-	final_light = light_plus_light(map->light->color, calc_light(map, hit, direction),
-		map->ambient->color, map->ambient->brightness);
+	final_light = light_plus_light(map->light->color, calc_light(map, hit, 
+				direction), map->ambient->color, map->ambient->brightness);
 	color = light_hit_color(final_light.color, final_light.brightness, 
 			hit.color);
 	return (color_to_int(color));

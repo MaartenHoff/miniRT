@@ -70,3 +70,13 @@ double point_distance(t_coords point1, t_coords point2)
 		distance *= -1;
 	return (distance);
 }
+
+t_coords	vec_cross(t_coords vector1, t_coords vector2)
+{
+	t_coords	result;
+
+	result.x = vector1.y * vector2.z - vector1.z * vector2.y;
+	result.y = vector1.z * vector2.x - vector1.x * vector2.z;
+	result.z = vector1.x * vector2.y - vector1.y * vector2.x;
+	return (result);
+}
