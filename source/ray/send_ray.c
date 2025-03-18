@@ -1,13 +1,5 @@
 #include "../../includes/miniRT.h"
 
-int	color_plus_light(t_color light_color, double brightness, t_color color)
-{
-	color.r *= (light_color.r * brightness) / 255;
-	color.g *= (light_color.g * brightness) / 255;
-	color.b *= (light_color.b * brightness) / 255;
-	return (color_to_int(color));
-}
-
 int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction, 
 		t_hit *closest_hit)
 {
@@ -35,17 +27,43 @@ int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction,
 	return (closest_hit->distance >= 0.0);
 }
 
+double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
+{
+	t_coords	direction;
+	t_coords	safe_distance;
+	t_hit		place_holder;
+	double		brightness;
+	double		skalar;
+
+	(void)old_ray;
+	place_holder.distance = -1;
+	safe_distance = vec_add(hit.point, vec_mul(hit.normal, 1e-4));
+	direction = vec_create(hit.point, map->light->source);
+	direction = vec_norm(direction);
+	if (send_ray_to_objects(map, safe_distance, direction, &place_holder))
+		return (0);
+	skalar = vec_skalar(hit.normal, direction);
+	if (skalar < 0)
+		return (0);
+	brightness = map->light->brightness * skalar;
+	if (brightness > 1)
+		brightness = 1;
+	return (brightness);
+}
+
 int	send_ray(t_map *map, t_coords direction)
 {
-	t_hit	hit;
-	int		color;
+	t_hit			hit;
+	t_light_data	final_light;
+	t_color			color;
 
 	hit.distance = -1;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
-		return (color_plus_light(map->ambient->color, map->ambient->brightness, 
-				(t_color){0, 0, 0}));
-	color = color_plus_light(map->ambient->color, map->ambient->brightness, 
+		return (color_to_int(light_hit_color(map->ambient->color, 
+					map->ambient->brightness, (t_color){0, 0, 0})));
+	final_light = light_plus_light(map->light->color, calc_light(map, hit, 
+				direction), map->ambient->color, map->ambient->brightness);
+	color = light_hit_color(final_light.color, final_light.brightness, 
 			hit.color);
-	//printf("color: %d\n", color);
-	return (color);
+	return (color_to_int(color));
 }
