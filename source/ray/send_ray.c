@@ -43,11 +43,7 @@ double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
 	if (send_ray_to_objects(map, safe_distance, direction, &place_holder))
 		return (0);
 	skalar = vec_skalar(hit.normal, direction);
-	if (skalar < 0)
-		return (0);
 	brightness = map->light->brightness * skalar;
-	if (brightness > 1)
-		brightness = 1;
 	return (brightness);
 }
 
@@ -59,10 +55,9 @@ int	send_ray(t_map *map, t_coords direction)
 
 	hit.distance = -1;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
-		return (color_to_int(light_hit_color(map->ambient->color, 
-					map->ambient->brightness, (t_color){0, 0, 0})));
-	final_light = light_plus_light(map->light->color, calc_light(map, hit, 
-				direction), map->ambient->color, map->ambient->brightness);
+		return (0);
+	final_light = light_plus_light(map->light->color, calc_light(map, hit, direction),
+		map->ambient->color, map->ambient->brightness);
 	color = light_hit_color(final_light.color, final_light.brightness, 
 			hit.color);
 	return (color_to_int(color));

@@ -21,9 +21,9 @@ t_light_data	light_plus_light(t_color light1, double brightness1,
 	result.color.r = light1.r * brightness1 + light2.r * brightness2;
 	result.color.g = light1.g * brightness1 + light2.g * brightness2;
 	result.color.b = light1.b * brightness1 + light2.b * brightness2;
-	result.color.r = fmin(fmax(result.color.r, 0), 255);
-	result.color.g = fmin(fmax(result.color.g, 0), 255);
-	result.color.b = fmin(fmax(result.color.b, 0), 255);
+	result.color.r = fmin(result.color.r, 255);
+	result.color.g = fmin(result.color.g, 255);
+	result.color.b = fmin(result.color.b, 255);
 	result.brightness = brightness1 + brightness2;
 	return (result);
 }
