@@ -12,8 +12,8 @@ int	plane_hit(t_planes *plane, t_coords origin, t_coords direction, t_hit *hit)
 	hit->point = vec_add(origin, vec_mul(direction, t));
 	hit->distance = t;
 	hit->color = plane->color;
-	// if (vec_skalar(direction, normal) > 0)
-	// 	normal = vec_mul(normal, -1);
+	if (vec_skalar(direction, normal) > 0)
+		normal = vec_mul(normal, -1);
 	hit->normal = normal;
 	return (0);
 }

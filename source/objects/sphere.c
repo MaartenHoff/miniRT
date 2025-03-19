@@ -12,6 +12,12 @@ int	sphere_hit(t_spheres *sphere, t_coords origin, t_coords direction,
 	hit->distance = t;
 	hit->color = sphere->color;
 	hit->normal = vec_norm(vec_create(sphere->center, hit->point));
+	// printf("--------------------------------\n");
+	// printf("hit point: %lf, %lf, %lf\n", hit->point.x, hit->point.y, hit->point.z);
+	// printf("hit distance: %lf\n", hit->distance);
+	// printf("hit color: %d, %d, %d\n", hit->color.r, hit->color.g, hit->color.b);
+	// printf("hit normal: %lf, %lf, %lf\n", hit->normal.x, hit->normal.y, hit->normal.z);
+	// printf("--------------------------------\n");
 	return (0);
 }
 
