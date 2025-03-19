@@ -22,10 +22,14 @@ int	calculate_viewport(t_map **map)
 	center = vec_add((*map)->camera->coords, (*map)->camera->vector);
 	(*map)->viewport->start = vec_add(center, 
 			vec_add(vec_mul(vec_right, -1), vec_up));
-	(*map)->viewport->x_vector = vec_mul(vec_right, 
+	(*map)->viewport->x_vector = vec_mul(vec_norm(vec_right), 
 			(*map)->viewport->width / WIDTH);
-	(*map)->viewport->y_vector = vec_mul(vec_up, -1 * 
+	(*map)->viewport->y_vector = vec_mul(vec_norm(vec_up), -1 * 
 			(*map)->viewport->height / HEIGHT);
+	printf("height: %lf\n", (*map)->viewport->height);
+	print_vektor((*map)->viewport->x_vector);
+	print_vektor((*map)->viewport->y_vector);
+	print_vektor((*map)->viewport->start);
 	return (0);
 }
 
