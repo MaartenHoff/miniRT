@@ -37,7 +37,7 @@ double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
 
 	(void)old_ray;
 	place_holder.distance = -1;
-	safe_distance = vec_add(hit.point, vec_mul(hit.normal, 1e-4));
+	safe_distance = vec_add(hit.point, vec_mul(hit.normal, 1e-6));
 	direction = vec_create(hit.point, map->light->source);
 	direction = vec_norm(direction);
 	if (send_ray_to_objects(map, safe_distance, direction, &place_holder))
@@ -57,9 +57,15 @@ int	send_ray(t_map *map, t_coords direction)
 	hit.distance = -1;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
 		return (0);
+	// printf("\nhit distance: %lf\n", hit.distance);
+	// printf("hit color: %d, %d, %d\n", hit.color.r, hit.color.g, hit.color.b);
+	// printf("hit normal: %lf, %lf, %lf\n", hit.normal.x, hit.normal.y, hit.normal.z);
+	//printf("hit point: %lf, %lf, %lf\n", hit.point.x, hit.point.y, hit.point.z);
+	// printf("----------");
 	final_light = light_plus_light(map->light->color, 
 			calc_light(map, hit, direction), map->ambient->color, 
 			map->ambient->brightness);
+	printf("final_light: %d, %d, %d\n", final_light.color.r, final_light.color.g, final_light.color.b);
 	color = light_hit_color(final_light.color, final_light.brightness, 
 			hit.color);
 	return (color_to_int(color));
