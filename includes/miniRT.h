@@ -13,6 +13,14 @@
 # define ERR_ARGC	128		// Wrong number of arguments
 # define ERR_FDFILE	130		// File cant open
 # define ERR_NOTRT	131		// File is not a .rt file
+// params
+# define ERR_PARAM	132		// Params error: Incorrect parameter format or count
+# define ERR_A		133		// Ambient error: Invalid ambient light parameters
+# define ERR_C		134		// Camera error: Invalid camera parameters
+# define ERR_L		135		// Light error: Invalid light parameters
+# define ERR_SP		136		// Sphere error: Invalid sphere parameters
+# define ERR_PL		137		// Plane error: Invalid plane parameters
+# define ERR_CY		138		// Cylinder error: Invalid cylinder parameters
 
 # include <stdlib.h>
 # include <stdio.h>	
@@ -52,9 +60,13 @@ int				init_map(char ***params, t_map **map);
 int				init_mlx_data(t_mlx_data **mlx_data);
 int				another_object(char **params, t_map **map);
 //		utils
+int				check_params(char ****params);
 char			**tokenizer(char *line);
 t_coords		split_coords(char *str);
 t_color			split_color(char *str);
+int				check_light(char **params);
+int				check_camera(char **params);
+int				check_ambient(char **params);
 
 //	utils
 // 		free
