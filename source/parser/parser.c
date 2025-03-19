@@ -26,10 +26,6 @@ int	calculate_viewport(t_map **map)
 			(*map)->viewport->width / WIDTH);
 	(*map)->viewport->y_vector = vec_mul(vec_norm(vec_up), -1 * 
 			(*map)->viewport->height / HEIGHT);
-	printf("height: %lf\n", (*map)->viewport->height);
-	print_vektor((*map)->viewport->x_vector);
-	print_vektor((*map)->viewport->y_vector);
-	print_vektor((*map)->viewport->start);
 	return (0);
 }
 
