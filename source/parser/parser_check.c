@@ -60,7 +60,7 @@ int	check_params(char ****params)
 		else
 			return (free_params(*params), ERR_PARAM);
 	}
-	if (!(params && (*params) && (*params)[i]) || error_check)
+	if (!(params && (*params)) || error_check)
 		return (free_params(*params), ERR_PARAM);
 	return (error_check);
 }
