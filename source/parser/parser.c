@@ -62,7 +62,7 @@ int	fill_params(int fd, char ****params)
 		i++;
 	}
 	(*params)[i] = NULL;
-	return (0);
+	return (check_params(params));
 }
 
 int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv)
