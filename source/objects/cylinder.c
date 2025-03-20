@@ -1,16 +1,51 @@
 #include "../../includes/miniRT.h"
 
-double	mantle_intersection(t_cylinder *cylinder, t_coords origin, 
-			t_coords direction)
+double	mantle_intersection(t_cylinder *cylinder, t_coords origin,
+		t_coords direction)
 {
-	(void)cylinder;
-	(void)origin;
-	(void)direction;
-	return (-1);
+	t_coords	oc;
+	t_coords	d_proj;
+	t_coords	oc_proj;
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		sqrt_disc;
+	double		t0;
+	double		t1;
+	double		t;
+	t_coords	hit;
+	double		proj;
+
+	oc = vec_sub(origin, cylinder->base);
+	d_proj = vec_sub(direction, vec_mul(cylinder->vector, vec_skalar(direction,
+					cylinder->vector)));
+	oc_proj = vec_sub(oc, vec_mul(cylinder->vector, vec_skalar(oc,
+					cylinder->vector)));
+	a = vec_skalar(d_proj, d_proj);
+	b = 2.0 * vec_skalar(d_proj, oc_proj);
+	c = vec_skalar(oc_proj, oc_proj) - cylinder->radius * cylinder->radius;
+	discriminant = b * b - 4.0 * a * c;
+	if (discriminant < 0 || fabs(a) < 1e-6)
+		return (-1);
+	sqrt_disc = sqrt(discriminant);
+	t0 = (-b - sqrt_disc) / (2.0 * a);
+	t1 = (-b + sqrt_disc) / (2.0 * a);
+	if (t0 > 0)
+		t = t0;
+	else if (t1 > 0)
+		t = t1;
+	else
+		return (-1);
+	hit = vec_add(origin, vec_mul(direction, t));
+	proj = vec_skalar(vec_sub(hit, cylinder->base), cylinder->vector);
+	if (proj < 0 || proj > cylinder->height)
+		return (-1);
+	return (t);
 }
 
-double	get_lowest_but_positve_t(double plane1_t, double plane2_t, 
-			double mantle_t)
+double	get_lowest_but_positve_t(double plane1_t, double plane2_t,
+		double mantle_t)
 {
 	if (plane1_t > 0 && plane2_t > 0 && plane1_t <= plane2_t)
 		plane2_t = plane1_t;
@@ -33,7 +68,8 @@ double	get_lowest_but_positve_t(double plane1_t, double plane2_t,
 	return (-1);
 }
 
-t_hit	circle_hit(t_planes *plane, double radius, t_coords origin, t_coords direction)
+t_hit	circle_hit(t_planes *plane, double radius, t_coords origin,
+		t_coords direction)
 {
 	t_hit	hit;
 	double	distance;
@@ -47,9 +83,8 @@ t_hit	circle_hit(t_planes *plane, double radius, t_coords origin, t_coords direc
 	return (hit);
 }
 
-
-int	cylinder_intersection(t_cylinder *cylinder, t_coords origin, 
-	t_coords direction, t_coords *normal)
+int	cylinder_intersection(t_cylinder *cylinder, t_coords origin,
+		t_coords direction, t_coords *normal)
 {
 	t_hit		circle1_hit;
 	t_hit		circle2_hit;
@@ -57,10 +92,13 @@ int	cylinder_intersection(t_cylinder *cylinder, t_coords origin,
 	double		t;
 	t_coords	hit;
 
-	circle1_hit = circle_hit(cylinder->plane1, cylinder->radius, origin, direction);
-	circle2_hit = circle_hit(cylinder->plane2, cylinder->radius, origin, direction);
+	circle1_hit = circle_hit(cylinder->plane1, cylinder->radius, origin,
+			direction);
+	circle2_hit = circle_hit(cylinder->plane2, cylinder->radius, origin,
+			direction);
 	mantle_t = mantle_intersection(cylinder, origin, direction);
-	t = get_lowest_but_positve_t(circle1_hit.distance, circle2_hit.distance, mantle_t);
+	t = get_lowest_but_positve_t(circle1_hit.distance, circle2_hit.distance,
+			mantle_t);
 	if (t < 0)
 		return (-1);
 	if (t == circle1_hit.distance || t == circle2_hit.distance)
@@ -68,14 +106,14 @@ int	cylinder_intersection(t_cylinder *cylinder, t_coords origin,
 	else
 	{
 		hit = vec_add(origin, vec_mul(direction, t));
-		*normal = vec_create(vec_add(cylinder->base, 
-					vec_mul(cylinder->vector, cylinder->height)), hit);
+		*normal = vec_create(vec_add(cylinder->base, vec_mul(cylinder->vector,
+						cylinder->height)), hit);
 	}
 	return (t);
 }
 
-int	cylinder_hit(t_cylinder *cylinder, t_coords origin, 
-	t_coords direction, t_hit *hit)
+int	cylinder_hit(t_cylinder *cylinder, t_coords origin, t_coords direction,
+		t_hit *hit)
 {
 	int			t;
 	t_coords	normal;
