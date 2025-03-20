@@ -42,6 +42,7 @@ int	add_cylinder(char **params, t_objects **objects)
 		return (ERR_NOMEM);
 	(*objects)->cylinder->base = split_coords(params[1]);
 	(*objects)->cylinder->vector = split_coords(params[2]);
+	(*objects)->cylinder->vector = vec_norm((*objects)->cylinder->vector);
 	(*objects)->cylinder->diameter = ft_atof(params[3]);
 	(*objects)->cylinder->radius = (*objects)->cylinder->diameter / 2;
 	(*objects)->cylinder->height = ft_atof(params[4]);

@@ -102,8 +102,6 @@ int	distance_to_cylinder(t_cylinder *cylinder, t_coords origin,
 	circle2_hit = circle_hit(cylinder->plane2, cylinder->radius, origin,
 			direction);
 	mantle_t = mantle_intersection(cylinder, origin, direction);
-	if (mantle_t < 0)
-		return (-1);
 	mantle_hit = vec_add(origin, vec_mul(direction, mantle_t));
 	t = get_lowest_but_positve_t(circle1_hit.distance, circle2_hit.distance,
 			mantle_t);
