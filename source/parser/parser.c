@@ -1,31 +1,41 @@
 #include "../../includes/miniRT.h"
 
-int	calculate_viewport(t_map **map)
+t_coords	world_up(t_map *map)
+{
+	t_coords	world_up;
+
+	world_up = (t_coords){0, 1, 0};
+	if (vec_skalar(map->camera->vector, world_up) > 0.99)
+		world_up = (t_coords){0, 0, 1};
+	return (world_up);
+}
+
+int	calculate_vp(t_map **map)
 {
 	t_coords	vec_right;
 	t_coords	vec_up;
 	t_coords	center;
 
-	(*map)->viewport = malloc(sizeof(t_viewport));
-	if (!(*map)->viewport)
+	(*map)->vp = malloc(sizeof(t_vp));
+	if (!(*map)->vp)
 		return (ERR_NOMEM);
-	(*map)->viewport->height = fabs(tan((*map)->camera->fov / 2) * 2);
+	(*map)->vp->height = tan((*map)->camera->fov / 2) * 2;
 	if (WIDTH > HEIGHT)
-		(*map)->viewport->width = (*map)->viewport->height * (WIDTH / HEIGHT);
+		(*map)->vp->width = (*map)->vp->height * (WIDTH / HEIGHT);
 	else
 	{
-		(*map)->viewport->width = (*map)->viewport->height;
-		(*map)->viewport->height = (*map)->viewport->width * (HEIGHT / WIDTH);
+		(*map)->vp->width = (*map)->vp->height;
+		(*map)->vp->height = (*map)->vp->width * (HEIGHT / WIDTH);
 	}
-	vec_right = vec_mul(vec_norm(vec_cross((*map)->camera->vector, (t_coords){0, 1, 0})), (*map)->viewport->width / 2);
-	vec_up = vec_mul(vec_norm(vec_cross(vec_right, (*map)->camera->vector)), (*map)->viewport->height / 2);
+	vec_right = vec_mul(vec_norm(vec_cross((*map)->camera->vector, 
+					world_up(*map))), (*map)->vp->width / 2);
+	vec_up = vec_mul(vec_norm(vec_cross(vec_right, (*map)->camera->vector)), 
+			(*map)->vp->height / 2);
 	center = vec_add((*map)->camera->coords, (*map)->camera->vector);
-	(*map)->viewport->start = vec_add(center, 
-			vec_add(vec_mul(vec_right, -1), vec_up));
-	(*map)->viewport->x_vector = vec_mul(vec_norm(vec_right), 
-			(*map)->viewport->width / WIDTH);
-	(*map)->viewport->y_vector = vec_mul(vec_norm(vec_up), -1 * 
-			(*map)->viewport->height / HEIGHT);
+	(*map)->vp->start = vec_add(center, vec_add(vec_mul(vec_right, -1), 
+				vec_up));
+	(*map)->vp->x_vector = vec_mul(vec_right, 2.0 / WIDTH);
+	(*map)->vp->y_vector = vec_mul(vec_up, -2.0 / HEIGHT);
 	return (0);
 }
 
@@ -83,6 +93,6 @@ int	parser(t_mlx_data **mlx_data, t_map **map, int argc, char **argv)
 	init_mlx_data(mlx_data);
 	error_check = init_map(params, map);
 	free_params(params);
-	error_check = calculate_viewport(map);
+	error_check = calculate_vp(map);
 	return (error_check);
 }

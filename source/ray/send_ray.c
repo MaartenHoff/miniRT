@@ -38,7 +38,7 @@ double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
 
 	(void)old_ray;
 	place_holder.distance = -1;
-	safe_distance = vec_add(hit.point, vec_mul(hit.normal, 1e-12));
+	safe_distance = vec_add(hit.point, vec_mul(hit.normal, 1e-10));
 	//printf("hit point: %lf, %lf, %lf\n", hit.point.x, hit.point.y, hit.point.z);
 	//printf("light source: %lf, %lf, %lf\n", map->light->source.x, map->light->source.y, map->light->source.z);
 	light_direction = vec_create(hit.point, map->light->source);

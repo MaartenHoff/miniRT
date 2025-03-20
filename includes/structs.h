@@ -81,14 +81,14 @@ typedef struct s_hit {
 	t_color		color;
 }	t_hit;
 
-typedef struct s_viewport
+typedef struct s_vp
 {
 	double		height;
 	double		width;
 	t_coords	start;
 	t_coords	x_vector;
 	t_coords	y_vector;
-}	t_viewport;
+}	t_vp;
 
 typedef struct s_map
 {
@@ -96,7 +96,7 @@ typedef struct s_map
 	t_camera	*camera;
 	t_objects	*objects;
 	t_light		*light;
-	t_viewport	*viewport;
+	t_vp		*vp;
 }	t_map;
 
 typedef struct s_mlx_data
