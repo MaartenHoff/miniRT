@@ -12,16 +12,8 @@ int	sphere_hit(t_spheres *sphere, t_coords origin, t_coords direction,
 	hit->distance = t;
 	hit->color = sphere->color;
 	hit->normal = vec_norm(vec_create(sphere->center, hit->point));
-	// printf("--------------------------------\n");
-	// printf("hit point: %lf, %lf, %lf\n", hit->point.x, hit->point.y, hit->point.z);
-	// printf("hit distance: %lf\n", hit->distance);
-	// printf("hit color: %d, %d, %d\n", hit->color.r, hit->color.g, hit->color.b);
-	// printf("hit normal: %lf, %lf, %lf\n", hit->normal.x, hit->normal.y, hit->normal.z);
-	// printf("--------------------------------\n");
 	return (0);
 }
-
-#include "../../includes/miniRT.h"
 
 double	solve_quadratic(double a, double b, double c)
 {
@@ -56,7 +48,6 @@ double	sphere_intersection(t_spheres *sphere, t_coords origin, t_coords d)
 	double		b;
 	double		c;
 
-	// print_vektor(d);
 	co = vec_create(sphere->center, origin);
 	a = vec_skalar(d, d);
 	b = 2 * vec_skalar(co, d);

@@ -2,7 +2,7 @@
 
 int	plane_hit(t_planes *plane, t_coords origin, t_coords direction, t_hit *hit)
 {
-	double	t;
+	double		t;
 	t_coords	normal;
 
 	normal = plane->vector;
@@ -21,7 +21,6 @@ int	plane_hit(t_planes *plane, t_coords origin, t_coords direction, t_hit *hit)
 double	plane_intersection(t_planes *plane, t_coords origin, t_coords direction)
 {
 	double		t;
-
 	double		np;
 	double		nd;
 	double		no;
@@ -30,6 +29,6 @@ double	plane_intersection(t_planes *plane, t_coords origin, t_coords direction)
 	nd = vec_skalar(plane->vector, direction);
 	no = vec_skalar(plane->vector, plane->point);
 
-	t = (-np + no)/nd;
+	t = (-np + no) / nd;
 	return (t);
 }
