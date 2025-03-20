@@ -43,6 +43,8 @@ typedef struct s_cylinder
 	double		diameter;
 	double		height;
 	t_color		color;
+	t_planes	*plane1;
+	t_planes	*plane2;
 }	t_cylinder;
 
 typedef struct s_objects

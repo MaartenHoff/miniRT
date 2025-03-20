@@ -1,8 +1,6 @@
 #include "../../includes/miniRT.h"
 
-/*
- * #A: [ambient_ratio]: 0.0-1.0    [R,G,B]: 0 to 255
- */
+//#A: [ambient_ratio]: 0.0-1.0    [R,G,B]: 0 to 255
 int	check_ambient(char **params)
 {
 	if (ft_arrlen(params) != 3)
@@ -13,8 +11,7 @@ int	check_ambient(char **params)
 	return (0);
 }
 
-//* #C: [x,y,z] position    [orientation] (e.g. 0,0,1)    
-//[FOV]: Field of view 0-180 degrees
+//* #C: [x,y,z] position  [x,y,z] (orientation)  [FOV]: Field of view 0-180
 int	check_camera(char **params)
 {
 	if (ft_arrlen(params) != 4)
@@ -25,9 +22,7 @@ int	check_camera(char **params)
 	return (0);
 }
 
-/*
- * #L: [x,y,z] position    [brightness] 0.0-1.0    ([R,G,B] is optional)
- */
+// #L: [x,y,z] position    [brightness] 0.0-1.0    ([R,G,B] is optional)
 int	check_light(char **params)
 {
 	int	len;

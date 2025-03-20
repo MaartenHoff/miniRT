@@ -45,6 +45,12 @@ int	add_cylinder(char **params, t_objects **objects)
 	(*objects)->cylinder->diameter = ft_atof(params[3]);
 	(*objects)->cylinder->height = ft_atof(params[4]);
 	(*objects)->cylinder->color = split_color(params[5]);
+	(*objects)->cylinder->plane1->point = (*objects)->cylinder->base;
+	(*objects)->cylinder->plane1->vector = (*objects)->cylinder->vector;
+	(*objects)->cylinder->plane2->point = vec_add((*objects)->cylinder->base, 
+			vec_mul(vec_norm((*objects)->cylinder->vector), 
+				(*objects)->cylinder->height));
+	(*objects)->cylinder->plane2->vector = (*objects)->cylinder->vector;
 	return (0);
 }
 
