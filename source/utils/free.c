@@ -40,6 +40,10 @@ void	free_cylinder(t_cylinder *cylinder)
 {
 	if (!cylinder)
 		return ;
+	if (cylinder->plane1)
+		free(cylinder->plane1);
+	if (cylinder->plane2)
+		free(cylinder->plane2);
 	free(cylinder);
 }
 

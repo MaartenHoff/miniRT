@@ -41,6 +41,7 @@ typedef struct s_cylinder
 	t_coords	base;
 	t_coords	vector;
 	double		diameter;
+	double		radius;
 	double		height;
 	t_color		color;
 	t_planes	*plane1;

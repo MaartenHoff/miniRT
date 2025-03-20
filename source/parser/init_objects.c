@@ -43,8 +43,11 @@ int	add_cylinder(char **params, t_objects **objects)
 	(*objects)->cylinder->base = split_coords(params[1]);
 	(*objects)->cylinder->vector = split_coords(params[2]);
 	(*objects)->cylinder->diameter = ft_atof(params[3]);
+	(*objects)->cylinder->radius = (*objects)->cylinder->diameter / 2;
 	(*objects)->cylinder->height = ft_atof(params[4]);
 	(*objects)->cylinder->color = split_color(params[5]);
+	(*objects)->cylinder->plane1 = malloc(sizeof(t_planes));
+	(*objects)->cylinder->plane2 = malloc(sizeof(t_planes));
 	(*objects)->cylinder->plane1->point = (*objects)->cylinder->base;
 	(*objects)->cylinder->plane1->vector = (*objects)->cylinder->vector;
 	(*objects)->cylinder->plane2->point = vec_add((*objects)->cylinder->base, 

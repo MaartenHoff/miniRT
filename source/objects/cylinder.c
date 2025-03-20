@@ -3,7 +3,10 @@
 double	mantle_intersection(t_cylinder *cylinder, t_coords origin, 
 			t_coords direction)
 {
-	
+	(void)cylinder;
+	(void)origin;
+	(void)direction;
+	return (-1);
 }
 
 double	get_lowest_but_positve_t(double plane1_t, double plane2_t, 
@@ -30,22 +33,37 @@ double	get_lowest_but_positve_t(double plane1_t, double plane2_t,
 	return (-1);
 }
 
+t_hit	circle_hit(t_planes *plane, double radius, t_coords origin, t_coords direction)
+{
+	t_hit	hit;
+	double	distance;
+
+	plane_hit(plane, origin, direction, &hit);
+	if (hit.distance < -1)
+		return (hit);
+	distance = vec_len(vec_create(hit.point, plane->point));
+	if (distance > radius)
+		hit.distance = -1;
+	return (hit);
+}
+
+
 int	cylinder_intersection(t_cylinder *cylinder, t_coords origin, 
 	t_coords direction, t_coords *normal)
 {
-	double		plane1_t;
-	double		plane2_t;
+	t_hit		circle1_hit;
+	t_hit		circle2_hit;
 	double		mantle_t;
 	double		t;
 	t_coords	hit;
 
-	plane1_t = plane_intersection(cylinder->plane1, origin, direction);
-	plane2_t = plane_intersection(cylinder->plane2, origin, direction);
+	circle1_hit = circle_hit(cylinder->plane1, cylinder->radius, origin, direction);
+	circle2_hit = circle_hit(cylinder->plane2, cylinder->radius, origin, direction);
 	mantle_t = mantle_intersection(cylinder, origin, direction);
-	t = get_lowest_but_positve_t(plane1_t, plane2_t, mantle_t);
+	t = get_lowest_but_positve_t(circle1_hit.distance, circle2_hit.distance, mantle_t);
 	if (t < 0)
 		return (-1);
-	if (t == plane1_t || t == plane2_t)
+	if (t == circle1_hit.distance || t == circle2_hit.distance)
 		*normal = cylinder->plane1->vector;
 	else
 	{
