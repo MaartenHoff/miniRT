@@ -49,7 +49,6 @@ t_hit	circle_hit(t_planes *plane, double radius, t_coords origin,
 	return (hit);
 }
 
-
 void	get_normal(t_cylinder *cylinder, t_coords hit, t_coords *normal)
 {
 	t_coords	proj;
@@ -73,6 +72,9 @@ int	distance_to_cylinder(t_cylinder *cylinder, t_coords origin,
 			direction);
 	mantle_t = mantle_intersection(cylinder, origin, direction);
 	mantle_hit = vec_add(origin, vec_mul(direction, mantle_t));
+	if(vec_skalar(vec_create(cylinder->base, mantle_hit), cylinder->vector) > cylinder->height 
+			|| vec_skalar(vec_create(cylinder->base, mantle_hit), cylinder->vector) < 0)
+		mantle_t = -1;
 	t = get_lowest_but_positve_t(circle1_hit.distance, circle2_hit.distance,
 			mantle_t);
 	if (t < 0)
