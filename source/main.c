@@ -8,7 +8,6 @@ void	set_pixel(int color, t_mlx_data *mlx_data, int x, int y)
 	*(int *)(mlx_data->addr + pixel) = color;
 }
 
-
 void	fill_window(t_mlx_data *mlx_data, t_map *map)
 {
 	int			x;

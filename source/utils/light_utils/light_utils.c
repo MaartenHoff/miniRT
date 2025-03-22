@@ -2,12 +2,6 @@
 
 int	color_to_int(t_color color)
 {
-	// if (color.r > 255)
-	// 	color.r = 255;
-	// if (color.g > 255)
-	// 	color.g = 255;
-	// if (color.b > 255)
-	// 	color.b = 255;
 	return ((color.r << 16) | (color.g << 8) | color.b);
 }
 

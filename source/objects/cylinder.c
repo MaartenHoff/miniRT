@@ -1,28 +1,9 @@
 #include "../../includes/miniRT.h"
 
-double	mantle_intersection(t_cylinder *cylinder, t_coords origin,
-		t_coords direction)
-{
-	double		a;
-	double		b;
-	double		c;
-	t_coords	B;
-	t_coords	u;
-
-	B = vec_sub(vec_create(cylinder->base, origin), vec_mul(cylinder->vector, 
-		vec_skalar(vec_create(cylinder->base, origin), cylinder->vector)));
-	u = vec_sub(direction, vec_mul(cylinder->vector, vec_skalar(direction, 
-		cylinder->vector)));
-	a = vec_skalar(u, u);
-	b = 2 * vec_skalar(u, B);
-	c = vec_skalar(B, B) - cylinder->radius * cylinder->radius;
-	return (solve_quadratic(a, b, c));
-}
-
 double	get_lowest_but_positve_t(double plane1_t, double plane2_t,
 		double mantle_t)
 {
-	double min_t;
+	double	min_t;
 
 	min_t = -1;
 	if (plane1_t > 0 && (min_t < 0 || plane1_t < min_t))
@@ -31,7 +12,7 @@ double	get_lowest_but_positve_t(double plane1_t, double plane2_t,
 		min_t = plane2_t;
 	if (mantle_t > 0 && (min_t < 0 || mantle_t < min_t))
 		min_t = mantle_t;
-	return min_t;
+	return (min_t);
 }
 
 t_hit	circle_hit(t_planes *plane, double radius, t_coords origin,
@@ -49,12 +30,12 @@ t_hit	circle_hit(t_planes *plane, double radius, t_coords origin,
 	return (hit);
 }
 
-
 void	get_normal(t_cylinder *cylinder, t_coords hit, t_coords *normal)
 {
 	t_coords	proj;
 
-	proj = vec_mul(cylinder->vector, vec_skalar(vec_create(cylinder->base, hit), cylinder->vector));
+	proj = vec_mul(cylinder->vector, vec_skalar(
+				vec_create(cylinder->base, hit), cylinder->vector));
 	*normal = vec_create(vec_create(cylinder->base, hit), proj);
 }
 

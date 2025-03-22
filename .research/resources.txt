@@ -1,7 +1,0 @@
-https://github.com/Xperaz/minirt?tab=readme-ov-file#description
-https://www.gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html
-https://computergraphicsguide.blogspot.com/2015/08/raycasting-and-phong-shading.html
-https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
-https://mrl.cs.nyu.edu/~dzorin/rend05/lecture2.pdf
-https://mrl.cs.nyu.edu/~dzorin/rend05/lecture1a.pdf
-https://raytracing.github.io/books/RayTracingInOneWeekend.html#rays,asimplecamera,andbackground

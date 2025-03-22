@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:18:56 by adiler            #+#    #+#             */
-/*   Updated: 2025/03/12 14:28:10 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/03/22 15:19:42 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <unistd.h>
 # include <math.h>
 
-#include "get_next_line.h"
+# include "get_next_line.h"
 
 typedef struct s_list
 {
@@ -89,6 +89,5 @@ int						ft_isspace(int c);
 char					*get_next_line(int fd);
 void					ft_free_array(char **array);
 double					ft_atof(char *str);
-
 
 #endif

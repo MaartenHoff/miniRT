@@ -36,7 +36,6 @@
 # define PLANE 2
 # define CYLINDER 3
 
-
 // ray_handling
 t_coords		get_direction(t_map *map, int x, int y);
 int				send_ray(t_map *map, t_coords direction);
@@ -46,8 +45,12 @@ double			sphere_intersection(t_spheres *sphere, t_coords origin,
 					t_coords d);
 int				plane_hit(t_planes *plane, t_coords origin, t_coords direction, 
 					t_hit *hit);
+double			plane_intersection(t_planes *plane, t_coords origin, 
+					t_coords direction);
 int				cylinder_hit(t_cylinder *cylinder_hit, t_coords origin, 
 					t_coords direction, t_hit *hit);
+double			mantle_intersection(t_cylinder *cylinder, t_coords origin,
+					t_coords direction);
 
 // hooks
 int				close_window(t_mlx_data *mlx_data);
@@ -91,14 +94,5 @@ t_coords		vec_mul(t_coords vector, double scalar);
 double			point_distance(t_coords point1, t_coords point2);
 t_coords		vec_add(t_coords point1, t_coords point2);
 t_coords		vec_cross(t_coords vector1, t_coords vector2);
-
-// testing
-void			print_map(t_map *map);
-void			print_vektor(t_coords vector);
-
-//intersections
-double			plane_intersection(t_planes *plane, t_coords origin, t_coords direction);
-
-//hits
 
 #endif

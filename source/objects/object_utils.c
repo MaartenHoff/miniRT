@@ -25,3 +25,23 @@ double	solve_quadratic(double a, double b, double c)
 		return (t2);
 	return (-1);
 }
+
+double	mantle_intersection(t_cylinder *cylinder, t_coords origin,
+	t_coords direction)
+{
+	double		a;
+	double		b;
+	double		c;
+	t_coords	q;
+	t_coords	u;
+
+	q = vec_sub(vec_create(cylinder->base, origin), vec_mul(cylinder->vector, 
+				vec_skalar(vec_create(cylinder->base, origin), 
+					cylinder->vector)));
+	u = vec_sub(direction, vec_mul(cylinder->vector, vec_skalar(direction, 
+					cylinder->vector)));
+	a = vec_skalar(u, u);
+	b = 2 * vec_skalar(u, q);
+	c = vec_skalar(q, q) - cylinder->radius * cylinder->radius;
+	return (solve_quadratic(a, b, c));
+}
