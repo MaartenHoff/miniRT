@@ -41,8 +41,7 @@ int	add_cylinder(char **params, t_objects **objects)
 	if (!(*objects)->cylinder)
 		return (ERR_NOMEM);
 	(*objects)->cylinder->base = split_coords(params[1]);
-	(*objects)->cylinder->vector = split_coords(params[2]);
-	(*objects)->cylinder->vector = vec_norm((*objects)->cylinder->vector);
+	(*objects)->cylinder->vector = vec_norm(split_coords(params[2]));
 	(*objects)->cylinder->diameter = ft_atof(params[3]);
 	(*objects)->cylinder->radius = (*objects)->cylinder->diameter / 2;
 	(*objects)->cylinder->height = ft_atof(params[4]);
@@ -52,7 +51,7 @@ int	add_cylinder(char **params, t_objects **objects)
 	(*objects)->cylinder->plane1->point = (*objects)->cylinder->base;
 	(*objects)->cylinder->plane1->vector = (*objects)->cylinder->vector;
 	(*objects)->cylinder->plane2->point = vec_add((*objects)->cylinder->base, 
-			vec_mul(vec_norm((*objects)->cylinder->vector), 
+			vec_mul((*objects)->cylinder->vector, 
 				(*objects)->cylinder->height));
 	(*objects)->cylinder->plane2->vector = (*objects)->cylinder->vector;
 	return (0);
