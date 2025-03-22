@@ -67,6 +67,7 @@ t_color			split_color(char *str);
 int				check_light(char **params);
 int				check_camera(char **params);
 int				check_ambient(char **params);
+double			solve_quadratic(double a, double b, double c);
 
 //	utils
 // 		free

@@ -3,45 +3,20 @@
 double	mantle_intersection(t_cylinder *cylinder, t_coords origin,
 		t_coords direction)
 {
-	t_coords	oc;
-	t_coords	d_proj;
-	t_coords	oc_proj;
 	double		a;
 	double		b;
 	double		c;
-	double		discriminant;
-	double		sqrt_disc;
-	double		t0;
-	double		t1;
-	double		t;
-	t_coords	hit;
-	double		proj;
+	t_coords	B;
+	t_coords	u;
 
-	oc = vec_sub(origin, cylinder->base);
-	d_proj = vec_sub(direction, vec_mul(cylinder->vector, vec_skalar(direction,
-					cylinder->vector)));
-	oc_proj = vec_sub(oc, vec_mul(cylinder->vector, vec_skalar(oc,
-					cylinder->vector)));
-	a = vec_skalar(d_proj, d_proj);
-	b = 2.0 * vec_skalar(d_proj, oc_proj);
-	c = vec_skalar(oc_proj, oc_proj) - cylinder->radius * cylinder->radius;
-	discriminant = b * b - 4.0 * a * c;
-	if (discriminant < 0 || fabs(a) < 1e-6)
-		return (-1);
-	sqrt_disc = sqrt(discriminant);
-	t0 = (-b - sqrt_disc) / (2.0 * a);
-	t1 = (-b + sqrt_disc) / (2.0 * a);
-	if (t0 > 0)
-		t = t0;
-	else if (t1 > 0)
-		t = t1;
-	else
-		return (-1);
-	hit = vec_add(origin, vec_mul(direction, t));
-	proj = vec_skalar(vec_sub(hit, cylinder->base), cylinder->vector);
-	if (proj < 0 || proj > cylinder->height)
-		return (-1);
-	return (t);
+	B = vec_sub(vec_create(cylinder->base, origin), vec_mul(cylinder->vector, 
+		vec_skalar(vec_create(cylinder->base, origin), cylinder->vector)));
+	u = vec_sub(direction, vec_mul(cylinder->vector, vec_skalar(direction, 
+		cylinder->vector)));
+	a = vec_skalar(u, u);
+	b = 2 * vec_skalar(u, B);
+	c = vec_skalar(B, B) - cylinder->radius * cylinder->radius;
+	return (solve_quadratic(a, b, c));
 }
 
 double	get_lowest_but_positve_t(double plane1_t, double plane2_t,
