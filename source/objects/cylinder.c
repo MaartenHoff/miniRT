@@ -77,16 +77,11 @@ t_hit	circle_hit(t_planes *plane, double radius, t_coords origin,
 
 void	get_normal(t_cylinder *cylinder, t_coords hit, t_coords *normal)
 {
-	double	t;
+	t_coords	proj;
 
-	t = vec_skalar(vec_add(hit, cylinder->base), cylinder->vector) / vec_skalar(cylinder->vector, cylinder->vector);
-	*normal = vec_create(vec_add(cylinder->base, vec_mul(cylinder->vector, t)), hit);
+	proj = vec_mul(cylinder->vector, vec_skalar(vec_create(cylinder->base, hit), cylinder->vector));
+	*normal = vec_create(vec_create(cylinder->base, hit), proj);
 }
-
-// {
-// hit = vec_add(origin, vec_mul(direction, t));
-// *normal = vec_create(vec_add(cylinder->base, vec_mul(cylinder->vector, cylinder->height)), hit);
-// }
 
 int	distance_to_cylinder(t_cylinder *cylinder, t_coords origin,
 		t_coords direction, t_coords *normal)
