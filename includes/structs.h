@@ -48,12 +48,26 @@ typedef struct s_cylinder
 	t_planes	*plane2;
 }	t_cylinder;
 
+typedef struct s_cube
+{
+	t_coords	center;
+	double		size;
+	t_planes	*plane1;
+	t_planes	*plane2;
+	t_planes	*plane3;
+	t_planes	*plane4;
+	t_planes	*plane5;
+	t_planes	*plane6;
+	t_color		color;
+}	t_cube;
+
 typedef struct s_objects
 {
 	int					type;
 	t_planes			*plane;
 	t_spheres			*spheres;
 	t_cylinder			*cylinder;
+	t_cube				*cube;
 	struct s_objects	*next;
 }	t_objects;
 
