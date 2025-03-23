@@ -19,7 +19,7 @@ int	plane_hit(t_planes *plane, t_coords origin, t_coords direction, t_hit *hit)
 	double		t;
 	t_coords	normal;
 
-	hit->distance = -1;
+	t = -1;
 	t = plane_intersection(plane, origin, direction);
 	if (t < 0)
 		return (0);

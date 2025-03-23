@@ -51,13 +51,14 @@ typedef struct s_cylinder
 typedef struct s_cube
 {
 	t_coords	center;
+	t_coords	vector;
 	double		size;
-	t_planes	*plane1;
-	t_planes	*plane2;
-	t_planes	*plane3;
-	t_planes	*plane4;
-	t_planes	*plane5;
-	t_planes	*plane6;
+	t_planes	*square1;
+	t_planes	*square2;
+	t_planes	*square3;
+	t_planes	*square4;
+	t_planes	*square5;
+	t_planes	*square6;
 	t_color		color;
 }	t_cube;
 

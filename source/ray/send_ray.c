@@ -21,6 +21,8 @@ int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction,
 			cylinder_hit(current->cylinder, origin, direction, &new_hit);
 		else if (current->type == PLANE)
 			plane_hit(current->plane, origin, direction, &new_hit);
+		else if (current->type == CUBE)
+			cube_hit(current->cube, origin, direction, &new_hit);
 		if (new_hit.distance >= 0.0)
 		{
 			if (closest_hit->distance < 0.0 || 

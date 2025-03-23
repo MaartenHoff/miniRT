@@ -62,6 +62,8 @@ void	free_map(t_map *map)
 			free_plane(temp->plane);
 		else if (temp->type == CYLINDER)
 			free_cylinder(temp->cylinder);
+		else if (temp->type == CUBE)
+			free_cube(temp->cube);
 		temp = temp->next;
 		ft_memdel((void **)&(map->objects));
 		map->objects = temp;

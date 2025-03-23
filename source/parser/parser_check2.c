@@ -48,6 +48,18 @@ int	check_cylinder(char **params)
 	return (0);
 }
 
+/*
+ * #cu: [x,y,z] center    [x, y, z] vector		[size]    [R,G,B]
+ */
+int	check_cube(char **params)
+{
+	if (ft_arrlen(params) != 5)
+		return (ERR_CU);
+	if (ft_atof(params[3]) <= 0.0)
+		return (ERR_CU);
+	return (0);
+}
+
 int	check_objects(char **params, int **check)
 {
 	int	error_check;
@@ -60,5 +72,9 @@ int	check_objects(char **params, int **check)
 		error_check = check_plane(params);
 	else if (!ft_strcmp(params[0], "cy"))
 		error_check = check_cylinder(params);
+	else if (!ft_strcmp(params[0], "cu"))
+		error_check = check_cube(params);
+	else
+		return (ERR_PARAM);
 	return (error_check);
 }

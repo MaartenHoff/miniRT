@@ -5,6 +5,7 @@ int	sphere_hit(t_spheres *sphere, t_coords origin, t_coords direction,
 {
 	double	t;
 
+	t = -1;
 	t = sphere_intersection(sphere, origin, direction);
 	if (t < 0)
 		return (0);
