@@ -16,6 +16,8 @@ void	handle_param_error(int error_code)
 		printf("Invalid plane parameters\n");
 	else if (error_code == ERR_CY)
 		printf("Invalid cylinder parameters\n");
+	else if (error_code == ERR_OBJ)
+		printf("No object\n");
 }
 
 int	handle_error(int error_code, t_map *map)

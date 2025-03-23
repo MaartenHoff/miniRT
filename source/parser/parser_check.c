@@ -1,66 +1,98 @@
 #include "../../includes/miniRT.h"
 
-/*
- * #sp: [x,y,z] center    [diameter] (positive float)    [R,G,B]
- */
-int	check_sphere(char **params)
+//#A: [ambient_ratio]: 0.0-1.0    [R,G,B]: 0 to 255
+int	check_ambient(char **params, int **check)
 {
-	if (ft_arrlen(params) != 4)
-		return (ERR_SP);
-	if (ft_atof(params[2]) <= 0.0)
-		return (ERR_SP);
+	(*check)[0]++;
+	if ((*check)[0] > 1)
+		return (ERR_A);
+	if (ft_arrlen(params) != 3)
+		return (ERR_A);
+	if (ft_atof(params[1]) < 0.0
+		|| ft_atof(params[1]) > 1.0)
+		return (ERR_A);
 	return (0);
 }
 
-/*
- * #pl: [x,y,z] point    [normal_vector]    [R,G,B]
- */
-int	check_plane(char **params)
+//* #C: [x,y,z] position  [x,y,z] (orientation)  [FOV]: Field of view 0-180
+int	check_camera(char **params, int **check)
 {
+	(*check)[1]++;
+	if ((*check)[1] > 1)
+		return (ERR_C);
 	if (ft_arrlen(params) != 4)
-		return (ERR_PL);
+		return (ERR_C);
+	if (ft_atoi(params[3]) < 0
+		|| ft_atoi(params[3]) > 180)
+		return (ERR_C);
 	return (0);
 }
 
-/*
- * #cy: [x,y,z] base    [axis]    [diameter]    [height]    [R,G,B]
- */
-int	check_cylinder(char **params)
+// #L: [x,y,z] position    [brightness] 0.0-1.0    ([R,G,B] is optional)
+int	check_light(char **params, int **check)
 {
-	if (ft_arrlen(params) != 6)
-		return (ERR_CY);
-	if (ft_atof(params[3]) <= 0.0)
-		return (ERR_CY);
-	if (ft_atof(params[4]) <= 0.0)
-		return (ERR_CY);
+	int	len;
+
+	(*check)[2]++;
+	if ((*check)[2] > 1)
+		return (ERR_L);
+	len = ft_arrlen(params);
+	if (len != 3 && len != 4)
+		return (ERR_L);
+	if (ft_atof(params[2]) < 0.0 || ft_atof(params[2]) > 1.0)
+		return (ERR_L);
 	return (0);
+}
+
+int	check_map(char ***params, int **check)
+{
+	int	i;
+	int	error_check;
+
+	i = -1;
+	error_check = 0;
+	if (!params || !(*params) || !(**params))
+		return (ERR_PARAM);
+	while (params && params[++i] && !error_check)
+	{
+		if (!ft_strcmp(params[i][0], "A"))
+			error_check = check_ambient(params[i], check);
+		else if (!ft_strcmp(params[i][0], "C"))
+			error_check = check_camera(params[i], check);
+		else if (!ft_strcmp(params[i][0], "L"))
+			error_check = check_light(params[i], check);
+		else if (!ft_strcmp(params[i][0], "sp") || 
+			!ft_strcmp(params[i][0], "pl") || 
+			!ft_strcmp(params[i][0], "cy"))
+			error_check = check_objects(params[i], check);
+		else
+			return (ERR_PARAM);
+	}
+	return (error_check);
 }
 
 int	check_params(char ****params)
 {
 	int	error_check;
-	int	i;
+	int	*check;
 
-	i = -1;
-	error_check = 0;
-	while (params && (*params) && (*params)[++i] && !error_check)
-	{
-		if (!ft_strcmp((*params)[i][0], "A"))
-			error_check = check_ambient((*params)[i]);
-		else if (!ft_strcmp((*params)[i][0], "C"))
-			error_check = check_camera((*params)[i]);
-		else if (!ft_strcmp((*params)[i][0], "L"))
-			error_check = check_light((*params)[i]);
-		else if (!ft_strcmp((*params)[i][0], "sp"))
-			error_check = check_sphere((*params)[i]);
-		else if (!ft_strcmp((*params)[i][0], "pl"))
-			error_check = check_plane((*params)[i]);
-		else if (!ft_strcmp((*params)[i][0], "cy"))
-			error_check = check_cylinder((*params)[i]);
-		else
-			return (free_params(*params), ERR_PARAM);
-	}
-	if (!(params && (*params)) || error_check)
-		return (free_params(*params), ERR_PARAM);
+	check = malloc(sizeof(int) * 4);
+	if (!check)
+		return (ERR_NOMEM);
+	check[0] = 0;
+	check[1] = 0;
+	check[2] = 0;
+	check[3] = 0;
+	error_check = check_map(*params, &check);
+	if (error_check)
+		return (free(check), free_params(*params), error_check);
+	if (check[0] < 1)
+		return (free(check), free_params(*params), ERR_A);
+	if (check[1] < 1)
+		return (free(check), free_params(*params), ERR_C);
+	if (check[2] < 1)
+		return (free(check), free_params(*params), ERR_L);
+	if (check[3] < 1)
+		return (free(check), free_params(*params), ERR_PARAM);
 	return (error_check);
 }
