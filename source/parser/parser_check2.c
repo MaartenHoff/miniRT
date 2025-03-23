@@ -9,6 +9,10 @@ int	check_sphere(char **params)
 		return (ERR_SP);
 	if (ft_atof(params[2]) <= 0.0)
 		return (ERR_SP);
+	if (!is_valid_coordinates(params[1]))
+		return (ERR_SP);
+	if (params[3] && !is_valid_color(params[3]))
+		return (ERR_SP);
 	return (0);
 }
 
@@ -18,6 +22,10 @@ int	check_sphere(char **params)
 int	check_plane(char **params)
 {
 	if (ft_arrlen(params) != 4)
+		return (ERR_PL);
+	if (!is_valid_coordinates(params[1]) || !is_valid_coordinates(params[2]))
+		return (ERR_PL);
+	if (params[3] && !is_valid_color(params[3]))
 		return (ERR_PL);
 	return (0);
 }
@@ -32,6 +40,10 @@ int	check_cylinder(char **params)
 	if (ft_atof(params[3]) <= 0.0)
 		return (ERR_CY);
 	if (ft_atof(params[4]) <= 0.0)
+		return (ERR_CY);
+	if (!is_valid_coordinates(params[1]) || !is_valid_coordinates(params[2]))
+		return (ERR_CY);
+	if (params[5] && !is_valid_color(params[5]))
 		return (ERR_CY);
 	return (0);
 }

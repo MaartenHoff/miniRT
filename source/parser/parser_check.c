@@ -11,6 +11,8 @@ int	check_ambient(char **params, int **check)
 	if (ft_atof(params[1]) < 0.0
 		|| ft_atof(params[1]) > 1.0)
 		return (ERR_A);
+	if (params[2] && !is_valid_color(params[2]))
+		return (ERR_A);
 	return (0);
 }
 
@@ -25,13 +27,15 @@ int	check_camera(char **params, int **check)
 	if (ft_atoi(params[3]) < 0
 		|| ft_atoi(params[3]) > 180)
 		return (ERR_C);
+	if (!is_valid_coordinates(params[1]) || !is_valid_coordinates(params[2]))
+		return (ERR_C);
 	return (0);
 }
 
 // #L: [x,y,z] position    [brightness] 0.0-1.0    ([R,G,B] is optional)
 int	check_light(char **params, int **check)
 {
-	int	len;
+	int			len;
 
 	(*check)[2]++;
 	if ((*check)[2] > 1)
@@ -40,6 +44,10 @@ int	check_light(char **params, int **check)
 	if (len != 3 && len != 4)
 		return (ERR_L);
 	if (ft_atof(params[2]) < 0.0 || ft_atof(params[2]) > 1.0)
+		return (ERR_L);
+	if (!is_valid_coordinates(params[1]))
+		return (ERR_L);
+	if (params[3] && !is_valid_color(params[3]))
 		return (ERR_L);
 	return (0);
 }

@@ -84,6 +84,8 @@ int				check_objects(char **params, int **check);
 double			solve_quadratic(double a, double b, double c);
 double			get_lowest_but_positve_t(double plane1_t, double plane2_t,
 					double mantle_t);
+int				is_valid_coordinates(const char *str);
+int				is_valid_color(const char *str);
 
 //	utils
 // 		free
