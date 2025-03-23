@@ -4,8 +4,8 @@
 # define WIDTH	1000
 # define HEIGHT	1000
 
-# define SHININESS		30
-# define SPEKULARFAKTOR	0.5
+# define SHININESS		100
+# define SPEKULARFAKTOR	1
 
 // Plastik			10 - 50		0.5 - 0.7
 // Metall			100 - 500	0.8 - 1.0
@@ -46,6 +46,7 @@
 # define SPHERE 1
 # define PLANE 2
 # define CYLINDER 3
+# define CUBE 4
 
 // ray_handling
 t_coords		get_direction(t_map *map, int x, int y);
