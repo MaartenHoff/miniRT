@@ -1,5 +1,10 @@
 #include "../../includes/miniRT.h"
 
+t_coords	reflect(t_coords v, t_coords n)
+{
+	return (vec_sub(v, vec_mul(n, 2 * vec_skalar(v, n))));
+}
+
 int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction, 
 		t_hit *closest_hit)
 {
@@ -27,15 +32,14 @@ int	send_ray_to_objects(t_map *map, t_coords origin, t_coords direction,
 	return (closest_hit->distance >= 0.0);
 }
 
-double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
+double	calc_light(t_map *map, t_hit hit, t_coords old_ray, double *skalar)
 {
 	t_coords	safe_distance;
 	t_hit		place_holder;
 	double		brightness;
-	double		skalar;
 	t_coords	l_dir;
+	t_coords	reflect_dir;
 
-	(void)old_ray;
 	place_holder.distance = -1;
 	safe_distance = vec_add(hit.point, vec_mul(hit.normal, 1e-10));
 	l_dir = vec_create(hit.point, map->light->source);
@@ -44,8 +48,13 @@ double	calc_light(t_map *map, t_hit hit, t_coords old_ray)
 		if (place_holder.distance < vec_len(l_dir))
 			return (0);
 	}
-	skalar = vec_skalar(hit.normal, vec_norm(l_dir));
-	brightness = map->light->brightness * skalar;
+	*skalar = vec_skalar(hit.normal, vec_norm(l_dir));
+	brightness = map->light->brightness * *skalar;
+	reflect_dir = reflect(l_dir, hit.normal);
+	*skalar = vec_skalar(vec_norm(reflect_dir), vec_norm(old_ray));
+	if (*skalar < 0)
+		*skalar = 0;
+	*skalar = SPEKULARFAKTOR * pow(*skalar, SHININESS);
 	return (brightness);
 }
 
@@ -54,14 +63,17 @@ int	send_ray(t_map *map, t_coords direction)
 	t_hit			hit;
 	t_light_data	final_light;
 	t_color			color;
+	double			skalar;
 
+	skalar = 0.0;
 	hit.distance = -1;
 	if (!send_ray_to_objects(map, map->camera->coords, direction, &hit))
 		return (0);
 	final_light = light_plus_light(map->light->color, 
-			calc_light(map, hit, direction), map->ambient->color, 
+			calc_light(map, hit, direction, &skalar), map->ambient->color, 
 			map->ambient->brightness);
 	color = light_hit_color(final_light.color, final_light.brightness, 
 			hit.color);
+	color = add_specular(color, map->light->color, skalar);
 	return (color_to_int(color));
 }

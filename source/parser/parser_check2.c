@@ -30,7 +30,7 @@ int	check_light(char **params)
 	len = ft_arrlen(params);
 	if (len != 3 && len != 4)
 		return (ERR_L);
-	if (ft_atof(params[2]) < 0.0)
+	if (ft_atof(params[2]) < 0.0 || ft_atof(params[2]) > 1.0)
 		return (ERR_L);
 	return (0);
 }

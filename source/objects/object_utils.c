@@ -26,6 +26,21 @@ double	solve_quadratic(double a, double b, double c)
 	return (-1);
 }
 
+double	get_lowest_but_positve_t(double plane1_t, double plane2_t,
+	double mantle_t)
+{
+	double	min_t;
+
+	min_t = -1;
+	if (plane1_t > 0 && (min_t < 0 || plane1_t < min_t))
+		min_t = plane1_t;
+	if (plane2_t > 0 && (min_t < 0 || plane2_t < min_t))
+		min_t = plane2_t;
+	if (mantle_t > 0 && (min_t < 0 || mantle_t < min_t))
+		min_t = mantle_t;
+	return (min_t);
+}
+
 double	mantle_intersection(t_cylinder *cylinder, t_coords origin,
 	t_coords direction)
 {

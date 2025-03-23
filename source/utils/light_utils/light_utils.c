@@ -24,3 +24,15 @@ t_light_data	light_plus_light(t_color light1, double brightness1,
 	result.brightness = (brightness1 + brightness2) / 2;
 	return (result);
 }
+
+t_color	add_specular(t_color final_color, t_color light_color, \
+		double specular_intensity)
+{
+	final_color.r += light_color.r * specular_intensity;
+	final_color.g += light_color.g * specular_intensity;
+	final_color.b += light_color.b * specular_intensity;
+	final_color.r = fmin(255, final_color.r);
+	final_color.g = fmin(255, final_color.g);
+	final_color.b = fmin(255, final_color.b);
+	return (final_color);
+}

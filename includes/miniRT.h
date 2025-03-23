@@ -4,6 +4,17 @@
 # define WIDTH	1000
 # define HEIGHT	1000
 
+# define SHININESS		30
+# define SPEKULARFAKTOR	0.5
+
+// Plastik			10 - 50		0.5 - 0.7
+// Metall			100 - 500	0.8 - 1.0
+// Glas				200 - 500	0.9 - 1.0
+// Marmor			50 - 200	0.6 - 0.9
+// Holz (poliert)	10 - 50		0.3 - 0.6
+// Holz (rau)		1 - 10		0.1 - 0.3
+// Haut				5 - 20		0.2 - 0.5
+
 # define MAX_INPUT 100
 
 # define ESC	65307
@@ -71,6 +82,8 @@ int				check_light(char **params);
 int				check_camera(char **params);
 int				check_ambient(char **params);
 double			solve_quadratic(double a, double b, double c);
+double			get_lowest_but_positve_t(double plane1_t, double plane2_t,
+					double mantle_t);
 
 //	utils
 // 		free
@@ -80,6 +93,8 @@ void			free_params(char ***params);
 int				handle_error(int error_code, t_map *map);
 // 		light_utils
 int				color_to_int(t_color color);
+t_color			add_specular(t_color final_color, t_color light_color, 
+					double specular_intensity);
 t_color			light_hit_color(t_color light_color, double brightness, 
 					t_color color);
 t_light_data	light_plus_light(t_color light1, double brightness1, 

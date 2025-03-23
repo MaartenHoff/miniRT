@@ -5,8 +5,10 @@ t_coords	world_up(t_map *map)
 	t_coords	world_up;
 
 	world_up = (t_coords){0, 1, 0};
-	if (vec_skalar(map->camera->vector, world_up) > 0.99)
-		world_up = (t_coords){0, 0, 1};
+	if (vec_skalar(vec_norm(map->camera->vector), world_up) > 0.99)
+		world_up = (t_coords){-1, 0, 0};
+	if (vec_skalar(vec_norm(map->camera->vector), world_up) < -0.99)
+		world_up = (t_coords){1, 0, 0};
 	return (world_up);
 }
 
