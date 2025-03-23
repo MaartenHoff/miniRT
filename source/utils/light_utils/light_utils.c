@@ -13,7 +13,7 @@ t_color	light_hit_color(t_color light_color, double brightness, t_color color)
 	return (color);
 }
 
-t_light_data	light_plus_light(t_color light1, double brightness1, 
+t_light_data	light_plus_light(t_color light1, double brightness1,
 					t_color light2, double brightness2)
 {
 	t_light_data	result;

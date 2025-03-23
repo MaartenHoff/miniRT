@@ -27,7 +27,7 @@ t_coords	vec_add(t_coords point1, t_coords point2)
 
 double	vec_len(t_coords vector)
 {
-	return (sqrt(vector.x * vector.x + vector.y * 
+	return (sqrt(vector.x * vector.x + vector.y *
 			vector.y + vector.z * vector.z));
 }
 
@@ -45,6 +45,6 @@ t_coords	vec_norm(t_coords vector)
 
 double	vec_skalar(t_coords vector1, t_coords vector2)
 {
-	return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z 
+	return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z
 		* vector2.z);
 }

@@ -94,6 +94,7 @@ double			get_lowest_but_positve_t(double plane1_t, double plane2_t,
 // 		free
 void			free_map(t_map *map);
 void			free_params(char ***params);
+void			free_cube(t_cube *cube);
 // 		error
 int				handle_error(int error_code, t_map *map);
 // 		light_utils

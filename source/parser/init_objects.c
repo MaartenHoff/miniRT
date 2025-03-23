@@ -63,6 +63,7 @@ int	another_object(char **params, t_map **map)
 	t_objects	*tmp;
 	int			error_check;
 
+	error_check = 0;
 	new_object = malloc(sizeof(t_objects));
 	new_object->next = NULL;
 	if (!ft_strcmp(params[0], "sp"))

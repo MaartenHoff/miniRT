@@ -82,6 +82,7 @@ int	cylinder_hit(t_cylinder *cylinder, t_coords origin,
 	double		t;
 	t_coords	normal;
 
+	t = -1;
 	normal = (t_coords){0, 0, 0};
 	t = distance_to_cylinder(cylinder, origin, direction, &normal);
 	if (t < 0)
