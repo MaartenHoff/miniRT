@@ -12,7 +12,11 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 {
 	int			x;
 	int			y;
+	int			j;
+	int			l;
 	int			color;
+	int			colors[4];
+	int			color_temp;
 	t_coords	direction;
 
 	y = 0;
@@ -21,6 +25,17 @@ void	fill_window(t_mlx_data *mlx_data, t_map *map)
 		x = 0;
 		while (x < WIDTH)
 		{
+			j = 0;
+			while (j < 1)
+			{
+				l = 0;
+				while (l < 1)
+				{
+					direction = get_direction(map, x, y);
+					color_temp = send_ray(map, direction);
+					color = 
+				}
+			}
 			direction = get_direction(map, x, y);
 			color = send_ray(map, direction);
 			set_pixel(color, mlx_data, x, y);

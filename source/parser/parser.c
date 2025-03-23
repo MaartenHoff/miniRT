@@ -34,8 +34,8 @@ int	calculate_vp(t_map **map)
 	center = vec_add((*map)->camera->coords, (*map)->camera->vector);
 	(*map)->vp->start = vec_add(center, vec_add(vec_mul(vec_right, -1), 
 				vec_up));
-	(*map)->vp->x_vector = vec_mul(vec_right, 2.0 / WIDTH);
-	(*map)->vp->y_vector = vec_mul(vec_up, -2.0 / HEIGHT);
+	(*map)->vp->x_vector = vec_mul(vec_right, 2.0 / (WIDTH + 1000));
+	(*map)->vp->y_vector = vec_mul(vec_up, -2.0 / (HEIGHT + 1000));
 	return (0);
 }
 
