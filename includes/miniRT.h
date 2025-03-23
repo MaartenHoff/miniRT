@@ -33,12 +33,14 @@
 # define ERR_SP		136		// Sphere error: Invalid sphere parameters
 # define ERR_PL		137		// Plane error: Invalid plane parameters
 # define ERR_CY		138		// Cylinder error: Invalid cylinder parameters
+# define ERR_CU		139		// Cube error: Invalid cube parameters
 
 # include <stdlib.h>
 # include <stdio.h>	
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
+# include <float.h>
 
 # include "structs.h"
 # include "42mlx/mlx.h"
@@ -77,6 +79,7 @@ int				parser(t_mlx_data **mlx_data, t_map **map, int argc,
 int				init_map(char ***params, t_map **map);
 int				init_mlx_data(t_mlx_data **mlx_data);
 int				another_object(char **params, t_map **map);
+int				add_cube(char **params, t_objects **objects);
 //		utils
 int				check_params(char ****params);
 char			**tokenizer(char *line);

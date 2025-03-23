@@ -67,7 +67,8 @@ int	init_groups(char ***params, t_map **map)
 			error_check = init_light(params[groups], map);
 		else if (!ft_strcmp(params[groups][0], "sp") || 
 			!ft_strcmp(params[groups][0], "pl") || 
-				!ft_strcmp(params[groups][0], "cy"))
+				!ft_strcmp(params[groups][0], "cy") || 
+					!ft_strcmp(params[groups][0], "cu"))
 			error_check = another_object(params[groups], map);
 		groups++;
 	}

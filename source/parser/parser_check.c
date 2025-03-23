@@ -63,7 +63,8 @@ int	check_map(char ***params, int **check)
 			error_check = check_light(params[i], check);
 		else if (!ft_strcmp(params[i][0], "sp") || 
 			!ft_strcmp(params[i][0], "pl") || 
-			!ft_strcmp(params[i][0], "cy"))
+			!ft_strcmp(params[i][0], "cy") ||
+			!ft_strcmp(params[i][0], "cu"))
 			error_check = check_objects(params[i], check);
 		else
 			return (ERR_PARAM);
