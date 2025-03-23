@@ -63,6 +63,8 @@ int				cylinder_hit(t_cylinder *cylinder_hit, t_coords origin,
 					t_coords direction, t_hit *hit);
 double			mantle_intersection(t_cylinder *cylinder, t_coords origin,
 					t_coords direction);
+int				cube_hit(t_cube *cube, t_coords origin, t_coords direction,	
+					t_hit *hit);
 
 // hooks
 int				close_window(t_mlx_data *mlx_data);
