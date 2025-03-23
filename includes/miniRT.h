@@ -29,6 +29,7 @@
 # define ERR_A		133		// Ambient error: Invalid ambient light parameters
 # define ERR_C		134		// Camera error: Invalid camera parameters
 # define ERR_L		135		// Light error: Invalid light parameters
+# define ERR_OBJ	139		// No object
 # define ERR_SP		136		// Sphere error: Invalid sphere parameters
 # define ERR_PL		137		// Plane error: Invalid plane parameters
 # define ERR_CY		138		// Cylinder error: Invalid cylinder parameters
@@ -78,9 +79,7 @@ int				check_params(char ****params);
 char			**tokenizer(char *line);
 t_coords		split_coords(char *str);
 t_color			split_color(char *str);
-int				check_light(char **params);
-int				check_camera(char **params);
-int				check_ambient(char **params);
+int				check_objects(char **params, int **check);
 double			solve_quadratic(double a, double b, double c);
 double			get_lowest_but_positve_t(double plane1_t, double plane2_t,
 					double mantle_t);

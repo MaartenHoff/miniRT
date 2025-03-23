@@ -1,36 +1,52 @@
 #include "../../includes/miniRT.h"
 
-//#A: [ambient_ratio]: 0.0-1.0    [R,G,B]: 0 to 255
-int	check_ambient(char **params)
-{
-	if (ft_arrlen(params) != 3)
-		return (ERR_A);
-	if (ft_atof(params[1]) < 0.0
-		|| ft_atof(params[1]) > 1.0)
-		return (ERR_A);
-	return (0);
-}
-
-//* #C: [x,y,z] position  [x,y,z] (orientation)  [FOV]: Field of view 0-180
-int	check_camera(char **params)
+/*
+ * #sp: [x,y,z] center    [diameter] (positive float)    [R,G,B]
+ */
+int	check_sphere(char **params)
 {
 	if (ft_arrlen(params) != 4)
-		return (ERR_C);
-	if (ft_atoi(params[3]) < 0
-		|| ft_atoi(params[3]) > 180)
-		return (ERR_C);
+		return (ERR_SP);
+	if (ft_atof(params[2]) <= 0.0)
+		return (ERR_SP);
 	return (0);
 }
 
-// #L: [x,y,z] position    [brightness] 0.0-1.0    ([R,G,B] is optional)
-int	check_light(char **params)
+/*
+ * #pl: [x,y,z] point    [normal_vector]    [R,G,B]
+ */
+int	check_plane(char **params)
 {
-	int	len;
-
-	len = ft_arrlen(params);
-	if (len != 3 && len != 4)
-		return (ERR_L);
-	if (ft_atof(params[2]) < 0.0 || ft_atof(params[2]) > 1.0)
-		return (ERR_L);
+	if (ft_arrlen(params) != 4)
+		return (ERR_PL);
 	return (0);
+}
+
+/*
+ * #cy: [x,y,z] base    [axis]    [diameter]    [height]    [R,G,B]
+ */
+int	check_cylinder(char **params)
+{
+	if (ft_arrlen(params) != 6)
+		return (ERR_CY);
+	if (ft_atof(params[3]) <= 0.0)
+		return (ERR_CY);
+	if (ft_atof(params[4]) <= 0.0)
+		return (ERR_CY);
+	return (0);
+}
+
+int	check_objects(char **params, int **check)
+{
+	int	error_check;
+
+	(*check)[3]++;
+	error_check = 0;
+	if (!ft_strcmp(params[0], "sp"))
+		error_check = check_sphere(params);
+	else if (!ft_strcmp(params[0], "pl"))
+		error_check = check_plane(params);
+	else if (!ft_strcmp(params[0], "cy"))
+		error_check = check_cylinder(params);
+	return (error_check);
 }
