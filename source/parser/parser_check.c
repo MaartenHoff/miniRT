@@ -93,6 +93,6 @@ int	check_params(char ****params)
 	if (check[2] < 1)
 		return (free(check), free_params(*params), ERR_L);
 	if (check[3] < 1)
-		return (free(check), free_params(*params), ERR_PARAM);
+		return (free(check), free_params(*params), ERR_OBJ);
 	return (error_check);
 }
