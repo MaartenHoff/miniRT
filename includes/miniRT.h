@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:44:50 by maahoff           #+#    #+#             */
-/*   Updated: 2025/03/24 11:57:53 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:35:46 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # define WIDTH	1000
 # define HEIGHT	1000
 
-# define SHININESS		100
-# define SPEKULARFAKTOR	1
+# define SHININESS		30
+# define SPEKULARFAKTOR	0.5
 
 // Plastik			10 - 50		0.5 - 0.7
 // Metall			100 - 500	0.8 - 1.0
