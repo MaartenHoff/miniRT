@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/24 11:44:50 by maahoff           #+#    #+#             */
+/*   Updated: 2025/03/24 11:57:53 by maahoff          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -40,7 +52,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
-# include <float.h>
 
 # include "structs.h"
 # include "42mlx/mlx.h"

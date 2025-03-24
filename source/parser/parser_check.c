@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_check.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/24 11:15:25 by maahoff           #+#    #+#             */
+/*   Updated: 2025/03/24 12:00:00 by maahoff          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 //#A: [ambient_ratio]: 0.0-1.0    [R,G,B]: 0 to 255
@@ -63,16 +75,16 @@ int	check_map(char ***params, int **check)
 		return (ERR_PARAM);
 	while (params && params[++i] && !error_check)
 	{
-		if (!ft_strcmp(params[i][0], "A"))
+		if (params[i][0] && !ft_strcmp(params[i][0], "A"))
 			error_check = check_ambient(params[i], check);
-		else if (!ft_strcmp(params[i][0], "C"))
+		else if (params[i][0] && !ft_strcmp(params[i][0], "C"))
 			error_check = check_camera(params[i], check);
-		else if (!ft_strcmp(params[i][0], "L"))
+		else if (params[i][0] && !ft_strcmp(params[i][0], "L"))
 			error_check = check_light(params[i], check);
-		else if (!ft_strcmp(params[i][0], "sp") || 
+		else if (params[i][0] && (!ft_strcmp(params[i][0], "sp") || 
 			!ft_strcmp(params[i][0], "pl") || 
 			!ft_strcmp(params[i][0], "cy") ||
-			!ft_strcmp(params[i][0], "cu"))
+			!ft_strcmp(params[i][0], "cu")))
 			error_check = check_objects(params[i], check);
 		else
 			return (ERR_PARAM);
@@ -103,5 +115,5 @@ int	check_params(char ****params)
 		return (free(check), free_params(*params), ERR_L);
 	if (check[3] < 1)
 		return (free(check), free_params(*params), ERR_OBJ);
-	return (error_check);
+	return (free(check), error_check);
 }

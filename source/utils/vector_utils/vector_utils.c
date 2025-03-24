@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/24 11:13:26 by maahoff           #+#    #+#             */
+/*   Updated: 2025/03/24 11:13:27 by maahoff          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //- create vector from two points
 //- get vector length
 //- normalize vector
@@ -27,8 +39,8 @@ t_coords	vec_add(t_coords point1, t_coords point2)
 
 double	vec_len(t_coords vector)
 {
-	return (sqrt(vector.x * vector.x + vector.y *
-			vector.y + vector.z * vector.z));
+	return (sqrt(vector.x * vector.x + vector.y 
+			* vector.y + vector.z * vector.z));
 }
 
 t_coords	vec_norm(t_coords vector)

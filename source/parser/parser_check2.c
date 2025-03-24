@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_check2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/24 11:15:05 by maahoff           #+#    #+#             */
+/*   Updated: 2025/03/24 11:26:00 by maahoff          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 /*
@@ -56,6 +68,10 @@ int	check_cube(char **params)
 	if (ft_arrlen(params) != 5)
 		return (ERR_CU);
 	if (ft_atof(params[3]) <= 0.0)
+		return (ERR_CU);
+	if (!is_valid_coordinates(params[1]) || !is_valid_coordinates(params[2]))
+		return (ERR_CU);
+	if (params[4] && !is_valid_color(params[4]))
 		return (ERR_CU);
 	return (0);
 }
